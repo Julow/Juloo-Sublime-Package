@@ -25,7 +25,7 @@ import os, re, sublime, sublime_plugin, colorsys
 # {0.55555F, 0.1F, 0.8F, 1F}
 #
 
-cache_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "julooColorHighlightCache/")
+cache_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "colorHighlightCache/")
 
 float_r = '\s*(0(?:\.[0-9]+)?|1(?:\.0+)?)[fF]?\s*'
 
