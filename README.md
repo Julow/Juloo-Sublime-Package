@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) -
+\- [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -15,15 +15,15 @@ If you want to update this package, use `git pull origin master`.
 
 ### Color Highlight
 
-Highlight colors in code and convert colors.
+Highlight colors in code. _(only when the cursor is over)_
 
 ![ColorHighlight](/images/color_highlight.png)
 
-Support many colors syntaxes and provide commands to convert colors.
+Contains somes commands to convert colors.
 
 ![ColorCommands](/images/color_commands.png)
 
-Support rgb/rgba/argb/hsl/hsla functions, CSS hex, int 24 or 32 bits (hexa) and array of float (java/js/C++/python/...).
+Support many colors syntaxes: rgb/rgba/argb/hsl/hsla functions, CSS hex, int 24 or 32 bits (hexa) and array of float (java/js/C++/python/...).
 
 ### Layout Spliter
 
@@ -34,6 +34,8 @@ Change easily the Sublime Text layout
 Split vertically or horizontally the layout.
 
 ![LayoutCommands](/images/layout_commands.png)
+
+Commands:
 
 * `Split vertical` (Split the current view vertically into 2 equal parts)
 * `Split horizontal` (Split the current view horizontally into 2 equal parts)
@@ -64,6 +66,26 @@ Contains **2** color schemes:
 * `Juloo3` A _light_ color scheme
 
 You can switch color schemes using the `Preferences / Color Scheme` menu.
+
+### Status bar
+
+When the cursor is on a color, the status bar say it:
+
+![StatusColors](/images/status_colors.png)
+
+Also when you accidentally change the font size, the status bar say it:
+
+![StatusFont](/images/status_font.png)
+
+### Misc
+
+**Open in browser**
+
+Contains a command that open the current file in a browser.
+
+If the file isn't _HTML_, the OS chooses which program opens that file.
+
+![Openbro](/images/misc_openbro.png)
 
 ## Old plugins
 
