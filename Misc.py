@@ -1,6 +1,17 @@
 import sublime, sublime_plugin, webbrowser
 
 #
+# Show the current scope in the status bar
+#
+class JulooScopeHelper(sublime_plugin.EventListener):
+
+	def on_selection_modified(self, view):
+		if view.settings().get("juloo_show_scope", False) and len(view.sel()) == 1 and view.sel()[0].size() == 0:
+			view.set_status("scope_juloo", "[ "+ view.scope_name(view.sel()[0].a) +"]")
+		else:
+			view.erase_status("scope_juloo");
+
+#
 # Show the font size for 3 secs when you change it using CTRL+mouse
 #
 class JulooFontSizeHelper(sublime_plugin.EventListener):

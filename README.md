@@ -91,6 +91,22 @@ If the file isn't _HTML_, the OS chooses which program opens that file.
 
 Contains somes configurations to improve Sublime Text.
 
+`configs/Preferences.sublime-settings` constains a default configuration.
+
+#### Scope
+
+The current _scope_ can be show in the status bar. _(disabled by default)_
+
+![ShowScope](/images/status_scope.png)
+
+Add this line into your configuration file to enable it:
+
+```js
+	"juloo_show_scope": true
+```
+
+The _scope_ is used to build color schemes.
+
 ## Old plugins
 
 * [JulooColorHightlight](https://github.com/Julow/JulooColorHighlight)
