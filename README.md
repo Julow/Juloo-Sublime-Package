@@ -2,11 +2,14 @@
 
 All my sublime plugins.
 
-- Color Highlight - Layout Spliter - Snippets - Color Schemes -
+\- [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) -
 
 ## Installation
 
-`git clone` this repo in `%Sublime text location%/Packages/Juloo-Sublime-Package`
+`git clone` this repo in `%Sublime text location%/Packages/Juloo-Sublime-Package`<br />
+or download it manually.
+
+If you want to update this package, use `git pull origin master`.
 
 ## Content
 
@@ -30,7 +33,7 @@ Change easily the Sublime Text layout
 
 Split vertically or horizontally the layout.
 
-![LayoutCommands](/captures/layout_commands.png)
+![LayoutCommands](/images/layout_commands.png)
 
 * `Split vertical` (Split the current view vertically into 2 equal parts)
 * `Split horizontal` (Split the current view horizontally into 2 equal parts)
