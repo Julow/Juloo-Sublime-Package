@@ -1,0 +1,70 @@
+[
+	{
+		"caption": "Color: Convert to int [0xAARRGGBB]",
+		"command": "juloo_color_convert",
+		"args":
+		{
+			"to": "int"
+		}
+	},
+	{
+		"caption": "Color: Convert to hex [#RRGGBBAA]",
+		"command": "juloo_color_convert",
+		"args":
+		{
+			"to": "hex"
+		}
+	},
+	{
+		"caption": "Color: Convert to rgb [rgba(R, G, B, A)]",
+		"command": "juloo_color_convert",
+		"args":
+		{
+			"to": "rgb"
+		}
+	},
+	{
+		"caption": "Color: Convert to hsl [hsla(H, S, L, A)]",
+		"command": "juloo_color_convert",
+		"args":
+		{
+			"to": "hsl"
+		}
+	},
+	{
+		"caption": "LayoutSpliter: Split Horizontal",
+		"command": "juloo_layout_spliter",
+		"args":
+		{
+			"action": "split",
+			"direction": "horizontal"
+		}
+	},
+	{
+		"caption": "LayoutSpliter: Split Vertical",
+		"command": "juloo_layout_spliter",
+		"args":
+		{
+			"action": "split",
+			"direction": "vertical"
+		}
+	},
+	{
+		"caption": "LayoutSpliter: Merge",
+		"command": "juloo_layout_spliter",
+		"args":
+		{
+			"action": "merge",
+			"direction": ""
+		}
+	},
+	{
+		"caption": "LayoutSpliter: Reset",
+		"command": "juloo_layout_spliter",
+		"args":
+		{
+			"action": "reset",
+			"direction": ""
+		}
+	}
+]
