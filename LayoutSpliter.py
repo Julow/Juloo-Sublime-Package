@@ -1,5 +1,9 @@
 import sublime, sublime_plugin
 
+#
+# Split vertically or horizontally the layout.
+#
+
 class Case():
 
 	def __init__(self, left, top, right, bottom):

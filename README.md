@@ -7,7 +7,7 @@ All my sublime plugins.
 ## Installation
 
 `git clone` this repo in `%Sublime text location%/Packages/Juloo-Sublime-Package`<br />
-or download it manually.
+or download it manually _(~600ko)_.
 
 If you want to update this package, use `git pull origin master`.
 
@@ -31,7 +31,7 @@ Change easily the Sublime Text layout
 
 ![LayoutSpliter](/images/layout_spliter.gif)
 
-Split vertically or horizontally the layout.
+Split vertically or horizontally the layout with commands.
 
 ![LayoutCommands](/images/layout_commands.png)
 
@@ -73,19 +73,23 @@ When the cursor is on a color, the status bar say it:
 
 ![StatusColors](/images/status_colors.png)
 
-Also when you accidentally change the font size, the status bar say it:
+Also when you accidentally change the font size, the status bar say it: _(for 3 secs)_
 
 ![StatusFont](/images/status_font.png)
 
 ### Misc
 
-**Open in browser**
+#### Open in browser
 
 Contains a command that open the current file in a browser.
 
 If the file isn't _HTML_, the OS chooses which program opens that file.
 
 ![Openbro](/images/misc_openbro.png)
+
+#### Config
+
+Contains somes configurations to improve Sublime Text.
 
 ## Old plugins
 

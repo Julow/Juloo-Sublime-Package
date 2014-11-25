@@ -11,15 +11,15 @@
 				<key>background</key>
 				<string>#1d1d1d</string>
 				<key>caret</key>
-				<string>#F8F8F8</string>
+				<string>#FFFFFF</string>
 				<key>foreground</key>
-				<string>#333333</string>
+				<string>#424242</string>
 				<key>selection</key>
 				<string>#333333</string>
 				<key>selectionBorder</key>
 				<string>#E09933</string>
 				<key>lineHighlight</key>
-				<string>#333333</string>
+				<string>#424242</string>
 				<key>findHighlight</key>
 				<string>#e6ce41</string>
 				<key>findHighlightForeground</key>

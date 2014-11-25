@@ -1,0 +1,35 @@
+{
+	"always_prompt_for_file_reload": true,
+	"auto_close_tags": true,
+	"auto_complete": false,
+	"bold_folder_labels": true,
+	"caret_style": "phase",
+	"default_line_ending": "unix",
+	"drag_text": false,
+	"ensure_newline_at_eof_on_save": true,
+	"font_options":
+	[
+		"gray_antialias"
+	],
+	"highlight_modified_tabs": true,
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"rulers":
+	[
+		80
+	],
+	"scroll_past_end": true,
+	"index_files": false,
+	"mouse_wheel_switches_tabs": true,
+	"open_files_in_new_window": false,
+	"overlay_scroll_bars": "enabled",
+	"shift_tab_unindent": true,
+	"show_encoding": true,
+	"show_line_endings": true,
+	"show_tab_close_buttons": true,
+	"tab_completion": false,
+	"word_wrap": false
+}
