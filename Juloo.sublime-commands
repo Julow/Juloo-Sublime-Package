@@ -1,5 +1,12 @@
 [
 	{
+		"caption": "Open this file in browser",
+		"command": "juloo_open_browser"
+	},
+
+
+
+	{
 		"caption": "Color: Convert to int [0xAARRGGBB]",
 		"command": "juloo_color_convert",
 		"args":
@@ -31,6 +38,9 @@
 			"to": "hsl"
 		}
 	},
+
+
+
 	{
 		"caption": "LayoutSpliter: Split Horizontal",
 		"command": "juloo_layout_spliter",

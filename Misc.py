@@ -12,7 +12,7 @@ class JulooFontSizeHelper(sublime_plugin.EventListener):
 		view.settings().clear_on_change("font_size")
 
 
-class JulooOpenBrowserCommand(sublime_plugin.TextCommand):
+class JulooOpenBrowser(sublime_plugin.TextCommand):
 
 	def run(self, edit):
 		f = self.view.file_name()
