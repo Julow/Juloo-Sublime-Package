@@ -7,10 +7,6 @@
 	"default_line_ending": "unix",
 	"drag_text": false,
 	"ensure_newline_at_eof_on_save": true,
-	"font_options":
-	[
-		"gray_antialias"
-	],
 	"highlight_modified_tabs": true,
 	"indent_guide_options":
 	[
