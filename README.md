@@ -7,9 +7,9 @@ All my sublime plugins.
 ## Installation
 
 `git clone` this repo in `%Sublime text location%/Packages/Juloo-Sublime-Package`<br />
-or download it manually _(~600ko)_.
+or download it manually.
 
-If you want to update this package, use `git pull origin master`.
+If you want to update the package, use `git pull origin master`.
 
 ## Content
 
@@ -44,7 +44,7 @@ Commands:
 
 ### Snippets
 
-Contains **9** snippets:
+Contains **10** snippets:
 
 * `main` C main function
 * `func` C function
