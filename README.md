@@ -55,6 +55,7 @@ Contains **9** snippets:
 * `#h` H file protection
 * `/*` Comment (Norme)
 * `*/` Extend the comment
+* `printf` Printf and fflush
 
 Write a snippet trigger and press **tab**. Press **tab** again to switch field.
 
