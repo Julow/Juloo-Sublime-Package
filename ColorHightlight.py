@@ -170,31 +170,33 @@ class Color():
 		else:
 			return "#000000FF"
 
-lastColor = None
-lastColorRegion = None
+lastColorRegions = None
 
 class JulooColorConvert(sublime_plugin.TextCommand):
 
 	def run(self, edit, **args):
-		global lastColorRegion, lastColor
-		if lastColorRegion != None:
-			arg = args['to']
-			if arg == 'hex':
-				self.view.replace(edit, lastColorRegion, lastColor.to_hex())
-			elif arg == 'rgb':
-				self.view.replace(edit, lastColorRegion, lastColor.to_rgb())
-			elif arg == 'hsl':
-				self.view.replace(edit, lastColorRegion, lastColor.to_hsl())
-			else:
-				self.view.replace(edit, lastColorRegion, lastColor.to_int())
-			print(arg)
+		global lastColorRegions
+		if lastColorRegions != None:
+			arg = args["to"]
+			i = len(lastColorRegions) - 1
+			while i >= 0:
+				r = lastColorRegions[i]
+				if arg == "hex":
+					self.view.replace(edit, r[0], r[1].to_hex())
+				elif arg == "rgb":
+					self.view.replace(edit, r[0], r[1].to_rgb())
+				elif arg == "hsl":
+					self.view.replace(edit, r[0], r[1].to_hsl())
+				else:
+					self.view.replace(edit, r[0], r[1].to_int())
+				i -= 1
 
 class JulooColorHighlight(sublime_plugin.EventListener):
 
 	color_regex = '(#|0x)[0-9a-fA-F]{8}|(#|0x)[0-9a-fA-F]{6}|#[0-9a-fA-F]{3,4}|(?:a?rgba?\( *\d{1,3} *, *\d{1,3} *, *\d{1,3} *(?:, *\d{0,3}(?:\.\d+)? *)?\))|(?:hsla?\( *\d{1,3} *, *\d{1,3}%? *, *\d{1,3}%? *(?:, *\d{0,3}(?:\.\d+)? *)?\))|(?:\{|\\[)'+ float_r +','+ float_r +','+ float_r +'(?:,'+ float_r +')?(?:\}|\\])'
 	xml_template = """	<dict>
 			<key>scope</key>
-			<string>juloo.color</string>
+			<string>juloo.color.{2}</string>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
@@ -205,7 +207,7 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 		</dict>
 		<dict>
 			<key>scope</key>
-			<string>juloo.colortext</string>
+			<string>juloo.colortext.{2}</string>
 			<key>settings</key>
 			<dict>
 				<key>fontStyle</key>
@@ -217,7 +219,6 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 			</dict>
 		</dict>
 	"""
-	tmp_sel = None
 
 	def get_xml_path(self, id):
 		return cache_path + str(id) +".tmTheme"
@@ -225,10 +226,11 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 	def get_full_path(self, theme_path):
 		return os.path.join(sublime.packages_path(), os.path.normpath(theme_path))
 
-	def get_colored_region(self, view):
-		if len(view.sel()) == 1:
-			sel = view.sel()[0]
-			sel = sublime.Region(sel.end(), sel.end())
+	def get_colored_regions(self, view):
+		regions = []
+		for sel in view.sel():
+			if sel.size == 0:
+				continue
 			line = view.line(sel)
 			startPos = max(line.begin(), sel.begin() - 30)
 			endPos = min(sel.end() + 30, line.end())
@@ -239,9 +241,10 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 				if m == None or m.end() > endPos:
 					break
 				if m.contains(sel):
-					return m
+					regions.append((m, Color(view.substr(m))))
+					break
 				max_iteration -= 1
-		return None
+		return regions
 
 	def on_close(self, view):
 		if view.settings().has("old_color_scheme"):
@@ -253,16 +256,16 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 			os.remove(full_path)
 
 	def on_selection_modified_async(self, view):
-		global lastColorRegion, lastColor
-		if len(view.sel()) == 0 or view.sel()[0] == self.tmp_sel:
-			return;
-		else:
-			self.tmp_sel = view.sel()[0]
-		region = self.get_colored_region(view)
-		if region == None:
+		global lastColorRegions
+		regions = self.get_colored_regions(view)
+		if lastColorRegions != None and len(regions) != len(lastColorRegions):
+			i = 0;
+			while i < len(lastColorRegions):
+				view.erase_regions("colorhightlight-" + str(i))
+				view.erase_regions("texthightlight-" + str(i))
+				i += 1
+		if len(regions) == 0:
 			view.erase_status("color_juloo")
-			view.erase_regions("colorhightlight")
-			view.erase_regions("texthightlight")
 			if view.settings().has("old_color_scheme"):
 				view.settings().erase("old_color_scheme")
 				view.settings().erase("color_scheme")
@@ -270,16 +273,17 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 				if os.path.exists(full_path):
 					os.remove(full_path)
 		else:
-			lastColorRegion = region
-			color = Color(view.substr(region))
-			lastColor = color
-			if color.valid:
-				status = "[ Color: "+ color.to_hex() +", "+ color.to_rgb() +", "+ color.to_int() +", "+ color.to_hsl() +" ]"
+			lastColorRegions = regions
+			if len(regions) == 1:
+				view.set_status("color_juloo", "[ Color: "+ regions[0][1].to_hex() +", "+ regions[0][1].to_rgb() +", "+ regions[0][1].to_int() +", "+ regions[0][1].to_hsl() +" ]")
+			elif len(regions) > 1:
+				status = "[ Colors: "
+				for r in regions:
+					status += r[1].to_hex()
+					status += ", "
+				view.set_status("color_juloo", status + "]")
 			else:
-				status = "[ Invalid color ]"
-			view.set_status("color_juloo", status)
-			if not color.valid:
-				return;
+				view.erase_status("color_juloo")
 			if view.settings().has("old_color_scheme"):
 				color_scheme = view.settings().get("old_color_scheme")
 			else:
@@ -287,7 +291,14 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 				view.settings().set("old_color_scheme", color_scheme)
 			data = sublime.load_resource(color_scheme)
 			index = data.find("</array>")
-			xml = self.xml_template.format(color.sublime_hex(), color.contrasted_hex())
+			xml = ""
+			i = 0
+			for r in regions:
+				s = str(i)
+				view.add_regions("colorhightlight-" + s, [r[0]], "juloo.color." + s, "circle", sublime.HIDDEN)
+				view.add_regions("texthightlight-" + s, [r[0]], "juloo.colortext." + s, "", sublime.DRAW_NO_OUTLINE)
+				xml += self.xml_template.format(r[1].sublime_hex(), r[1].contrasted_hex(), s)
+				i += 1
 			data = data[:index] + xml + data[index:]
 			if not os.path.exists(self.get_full_path(cache_path)):
 				os.mkdir(self.get_full_path(cache_path))
@@ -295,5 +306,3 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 			f.write(data.encode("utf-8"))
 			f.close()
 			view.settings().set("color_scheme", self.get_xml_path(view.id()).replace(sublime.packages_path(), "Packages"))
-			view.add_regions("colorhightlight", [region], "juloo.color", "circle", sublime.HIDDEN)
-			view.add_regions("texthightlight", [region], "juloo.colortext", "", sublime.DRAW_NO_OUTLINE)
