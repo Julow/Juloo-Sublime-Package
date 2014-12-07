@@ -236,13 +236,15 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 			startPos = max(line.begin(), sel.begin() - 27)
 			endPos = min(sel.end() + 27, line.end())
 			m = sublime.Region(startPos, startPos)
-			while 1:
+			max_iteration = 4
+			while max_iteration > 0:
 				m = view.find(self.color_regex, m.end())
 				if m == None or m.end() > endPos:
 					break
 				if m.contains(sel):
 					regions.append((m, Color(view.substr(m))))
 					break
+				max_iteration -= 1
 		return regions
 
 	def on_close(self, view):
