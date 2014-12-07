@@ -171,6 +171,7 @@ class Color():
 			return "#000000FF"
 
 lastColorRegions = None
+resourceCache = None
 
 class JulooColorConvert(sublime_plugin.TextCommand):
 
@@ -232,18 +233,16 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 			if sel.size == 0:
 				continue
 			line = view.line(sel)
-			startPos = max(line.begin(), sel.begin() - 30)
-			endPos = min(sel.end() + 30, line.end())
+			startPos = max(line.begin(), sel.begin() - 27)
+			endPos = min(sel.end() + 27, line.end())
 			m = sublime.Region(startPos, startPos)
-			max_iteration = 5
-			while max_iteration > 0:
+			while 1:
 				m = view.find(self.color_regex, m.end())
 				if m == None or m.end() > endPos:
 					break
 				if m.contains(sel):
 					regions.append((m, Color(view.substr(m))))
 					break
-				max_iteration -= 1
 		return regions
 
 	def on_close(self, view):
@@ -254,6 +253,15 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 		full_path = self.get_full_path(self.get_xml_path(view.id()))
 		if os.path.exists(full_path):
 			os.remove(full_path)
+
+	def get_res(self, name):
+		global resourceCache
+		if resourceCache == None:
+			resourceCache = (name, sublime.load_resource(name))
+		if resourceCache[0] != name:
+			resourceCache = None
+			return self.get_res(name)
+		return resourceCache[1]
 
 	def on_selection_modified_async(self, view):
 		global lastColorRegions
@@ -289,7 +297,7 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 			else:
 				color_scheme = view.settings().get("color_scheme")
 				view.settings().set("old_color_scheme", color_scheme)
-			data = sublime.load_resource(color_scheme)
+			data = self.get_res(color_scheme)
 			index = data.find("</array>")
 			xml = ""
 			i = 0
