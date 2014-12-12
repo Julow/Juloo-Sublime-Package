@@ -1,7 +1,7 @@
 {
 	"always_prompt_for_file_reload": true,
 	"auto_close_tags": true,
-	"auto_complete": false,
+	"update_check": false,
 	"bold_folder_labels": true,
 	"caret_style": "phase",
 	"default_line_ending": "unix",
