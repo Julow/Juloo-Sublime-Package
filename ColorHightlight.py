@@ -232,6 +232,8 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 		for sel in view.sel():
 			if sel.size == 0:
 				continue
+			elif len(regions) > 15:
+				break;
 			line = view.line(sel)
 			startPos = max(line.begin(), sel.begin() - 27)
 			endPos = min(sel.end() + 27, line.end())
