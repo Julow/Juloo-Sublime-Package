@@ -90,6 +90,7 @@ Checks:
 * Slash comment
 * Bracket line
 * Trailing space
+* Comma space
 
 _More checks will be added in the future._
 

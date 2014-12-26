@@ -20,6 +20,7 @@ reg_names = re.compile('^[a-z_0-9]+$')
 reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
 reg_bracket = re.compile('^\t*[\{\}]$')
 reg_trail = re.compile('\s+$')
+reg_comma = re.compile('[,;][^ ]')
 
 def strlen_tab(s):
 	l = 0
@@ -88,6 +89,7 @@ def norme_checker(view):
 # Bad include
 # Bracket line
 # Trailing space
+# Comma space
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	last_empty = False
@@ -115,6 +117,10 @@ def norme_checker(view):
 			if reg != None:
 				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
 				print("Norme Error: Trailing space")
+			commas = re.finditer(reg_comma, line)
+			for reg in commas:
+				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
+				print("Norme Error: Comma not followed by space")
 #
 # Slash comment
 #
