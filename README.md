@@ -83,8 +83,9 @@ Checks:
 * 25 lines per function
 * 4 params per function
 * Multiple empty lines
-* 80 chars lines
+* 80 chars per lines
 * Invalid function name
+* Bad include
 
 _More checks will be added in the future._
 

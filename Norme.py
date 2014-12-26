@@ -17,6 +17,7 @@ class JulooNormeChecker(sublime_plugin.TextCommand):
 		norme_checker(self.view)
 
 reg_names = re.compile('^[a-z_0-9]+$')
+reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
 
 def norme_checker(view):
 	invalids = []
@@ -63,16 +64,13 @@ def norme_checker(view):
 			print("Norme Error: " + str(len(params)) + " params in a function")
 #
 # Multiple empty lines
-# 80 chars lines
+# 80 chars per lines
+# Bad include
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	last_empty = False
 	for r in regions:
 		line = view.substr(r)
-		taboff = line.count('\t') * 3
-		if (len(line) + taboff) > 80:
-			invalids.append(sublime.Region(r.begin() + 80 - taboff, r.end()))
-			print("Norme Error: " + str(len(line) + taboff) + " chars in a line")
 		if len(line) == 0:
 			if last_empty:
 				invalids.append(sublime.Region(r.begin(), r.end() + 1));
@@ -80,6 +78,13 @@ def norme_checker(view):
 			last_empty = True
 		else:
 			last_empty = False
+			taboff = line.count('\t') * 3
+			if (len(line) + taboff) > 80:
+				invalids.append(sublime.Region(r.begin() + 80 - taboff, r.end()))
+				print("Norme Error: " + str(len(line) + taboff) + " chars in a line")
+			if re.match(reg_include, line):
+				invalids.append(r)
+				print("Norme Error: Bad include")
 #
 # End
 #
