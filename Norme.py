@@ -50,7 +50,7 @@ class JulooNorme(sublime_plugin.EventListener):
 		last_empty = False
 		for r in regions:
 			line = view.substr(r)
-			taboff = line.count('\t') * 4
+			taboff = line.count('\t') * 3
 			if (len(line) + taboff) > 80:
 				invalids.append(sublime.Region(r.begin() + 80 - taboff, r.end()))
 				print("Norme Error: " + str(len(line) + taboff) + " chars in a line")
