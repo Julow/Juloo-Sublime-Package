@@ -72,7 +72,8 @@ You can switch color schemes using the `Preferences / Color Scheme` menu.
 
 Highlight norme errors.
 
-Check and highlight norme errors after each saves only in `C` and `C++` files.
+Check and highlight norme errors after each saves only in `C` and `C++` files.<br />
+_Errors are also print to the Sublime Text console._
 
 Command:
 * `Check the norme` Check the norme on any file
@@ -83,11 +84,12 @@ Checks:
 * 4 params per function
 * Multiple empty lines
 * 80 chars lines
+* Invalid function name
 
 _More checks will be added in the future._
 
 If you want to disable **Norme Checker** (enabled by default)<br />
-Add this line to your `Settings - User`:
+Add this line into your `Settings - User`:
 
 ```js
 	// Disable Norme Checker

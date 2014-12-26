@@ -1,4 +1,4 @@
-import sublime, sublime_plugin
+import sublime, sublime_plugin, re
 
 #
 # Highlight norme errors
@@ -16,18 +16,26 @@ class JulooNormeChecker(sublime_plugin.TextCommand):
 	def run(self, edit, **args):
 		norme_checker(self.view)
 
+reg_names = re.compile('^[a-z_0-9]+$')
+
 def norme_checker(view):
 	invalids = []
 #
 # 5 functions per file
+# Invalid function name
 #
 	regions = view.find_by_selector("meta.function.c entity.name.function.c")
-	if len(regions) > 5:
-		i = 5
-		while i < len(regions):
-			invalids.append(regions[i])
-			i += 1
-		print("Norme Error: " + str(len(regions)) + " functions")
+	i = 0
+	for r in regions:
+		s = view.substr(r)
+		if not re.match(reg_names, s):
+			invalids.append(r)
+			print("Norme Error: Invalid function name '" + s + "'")
+		i += 1
+		if i > 5:
+			invalids.append(r)
+	if i > 5:
+		print("Norme Error: " + str(i) + " functions")
 #
 # 25 lines per function
 #
