@@ -89,6 +89,7 @@ Checks:
 * Function scope bad align
 * Slash comment
 * Bracket line
+* Trailing space
 
 _More checks will be added in the future._
 

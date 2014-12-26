@@ -19,6 +19,7 @@ class JulooNormeChecker(sublime_plugin.TextCommand):
 reg_names = re.compile('^[a-z_0-9]+$')
 reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
 reg_bracket = re.compile('^\t*[\{\}]$')
+reg_trail = re.compile('\s+$')
 
 def strlen_tab(s):
 	l = 0
@@ -86,6 +87,7 @@ def norme_checker(view):
 # 80 chars per lines
 # Bad include
 # Bracket line
+# Trailing space
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	last_empty = False
@@ -109,6 +111,10 @@ def norme_checker(view):
 				if not re.match(reg_bracket, line):
 					invalids.append(r)
 					print("Norme Error: Invalid bracket line")
+			reg = re.search(reg_trail, line)
+			if reg != None:
+				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
+				print("Norme Error: Trailing space")
 #
 # Slash comment
 #
