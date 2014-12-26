@@ -87,6 +87,7 @@ Checks:
 * Invalid function name
 * Bad include
 * Function scope bad align
+* Slash comment
 
 _More checks will be added in the future._
 

@@ -104,6 +104,13 @@ def norme_checker(view):
 				invalids.append(r)
 				print("Norme Error: Bad include")
 #
+# Slash comment
+#
+	regions = view.find_by_selector("comment.line");
+	if len(regions) > 0:
+		invalids += regions
+		print("Norme Error: Slash comments")
+#
 # End
 #
 	view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
