@@ -86,6 +86,7 @@ Checks:
 * 80 chars per lines
 * Invalid function name
 * Bad include
+* Function scope bad align
 
 _More checks will be added in the future._
 

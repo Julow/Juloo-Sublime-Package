@@ -1,4 +1,4 @@
-import sublime, sublime_plugin, re
+import sublime, sublime_plugin, re, math
 
 #
 # Highlight norme errors
@@ -19,14 +19,25 @@ class JulooNormeChecker(sublime_plugin.TextCommand):
 reg_names = re.compile('^[a-z_0-9]+$')
 reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
 
+def strlen_tab(s):
+	l = 0
+	for c in s:
+		if c == '\t':
+			l = math.trunc((l + 4) / 4) * 4
+		else:
+			l += 1
+	return (l)
+
 def norme_checker(view):
 	invalids = []
 #
 # 5 functions per file
 # Invalid function name
+# Function scope bad align
 #
 	regions = view.find_by_selector("meta.function.c entity.name.function.c")
 	i = 0
+	global_scope = -1
 	for r in regions:
 		s = view.substr(r)
 		if not re.match(reg_names, s):
@@ -35,6 +46,13 @@ def norme_checker(view):
 		i += 1
 		if i > 5:
 			invalids.append(r)
+		scope = sublime.Region(view.text_point(view.rowcol(r.begin())[0], 0), r.begin())
+		scope_len = strlen_tab(view.substr(scope).strip('*'))
+		if global_scope == -1:
+			global_scope = scope_len
+		elif global_scope != scope_len:
+			invalids.append(scope)
+			print("Norme Error: Function " + s + " bad align (" + str(scope_len) + ")")
 	if i > 5:
 		print("Norme Error: " + str(i) + " functions")
 #
@@ -78,10 +96,10 @@ def norme_checker(view):
 			last_empty = True
 		else:
 			last_empty = False
-			taboff = line.count('\t') * 3
-			if (len(line) + taboff) > 80:
-				invalids.append(sublime.Region(r.begin() + 80 - taboff, r.end()))
-				print("Norme Error: " + str(len(line) + taboff) + " chars in a line")
+			l = strlen_tab(line)
+			if l > 80:
+				invalids.append(sublime.Region(r.begin() + 80 - (line.count('\t') * 3), r.end()))
+				print("Norme Error: " + str(l) + " chars in a line")
 			if re.match(reg_include, line):
 				invalids.append(r)
 				print("Norme Error: Bad include")
