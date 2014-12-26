@@ -160,7 +160,7 @@
 			<string>invalid</string>
 			<key>settings</key>
 			<dict>
-				<key>background</key>
+				<key>foreground</key>
 				<string>#8E0400</string>
 			</dict>
 		</dict>
