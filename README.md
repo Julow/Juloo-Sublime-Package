@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [Norme Checker](#norme-checker) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -68,6 +68,20 @@ Contains **2** color schemes:
 
 You can switch color schemes using the `Preferences / Color Scheme` menu.
 
+### Norme Checker
+
+Highlight norme errors.
+
+_Norme Checker is not yet complete._
+
+If you want to disable **Norme Checker** (enabled by default)<br />
+Add this line to your `Settings - User`:
+
+```js
+	// Disable Norme Checker
+	"juloo_norme_check": false
+```
+
 ### Status bar
 
 When the cursor is on a color, the status bar say it:
@@ -103,6 +117,7 @@ The current _scope_ can be show in the status bar. _(disabled by default)_
 Add this line into your configuration file to enable it:
 
 ```js
+	// Enable Scope
 	"juloo_show_scope": true
 ```
 
