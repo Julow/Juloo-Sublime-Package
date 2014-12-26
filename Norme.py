@@ -40,8 +40,27 @@ class JulooNorme(sublime_plugin.EventListener):
 				while i < 4:
 					l += len(params[i]) + 1;
 					i += 1
-				r = sublime.Region(r.begin() + l, r.end() - 1)
-				invalids.append(r)
+				invalids.append(sublime.Region(r.begin() + l, r.end() - 1))
+				print("Norme Error: " + str(len(params)) + " params in a function")
+#
+# Multiple empty lines
+# 80 chars lines
+#
+		regions = view.lines(sublime.Region(0, view.size()));
+		last_empty = False
+		for r in regions:
+			line = view.substr(r)
+			taboff = line.count('\t') * 4
+			if (len(line) + taboff) > 80:
+				invalids.append(sublime.Region(r.begin() + 80 - taboff, r.end()))
+				print("Norme Error: " + str(len(line) + taboff) + " chars in a line")
+			if len(line) == 0:
+				if last_empty:
+					invalids.append(sublime.Region(r.begin(), r.end() + 1));
+					print("Norme Error: multiple empty line")
+				last_empty = True
+			else:
+				last_empty = False
 #
 # End
 #
