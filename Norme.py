@@ -6,10 +6,15 @@ import sublime, sublime_plugin
 class JulooNorme(sublime_plugin.EventListener):
 
 	def on_post_save_async(self, view):
-		if view.settings().get("juloo_norme_check", True):
+		if view.settings().get("juloo_norme_check", True) and "C++/C" in view.settings().get("syntax"):
 			norme_checker(view)
 		else:
 			view.erase_regions("norme_errors")
+
+class JulooNormeChecker(sublime_plugin.TextCommand):
+
+	def run(self, edit, **args):
+		norme_checker(self.view)
 
 def norme_checker(view):
 	invalids = []

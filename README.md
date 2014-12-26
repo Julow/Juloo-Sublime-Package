@@ -72,7 +72,19 @@ You can switch color schemes using the `Preferences / Color Scheme` menu.
 
 Highlight norme errors.
 
-_Norme Checker is not yet complete._
+Check and highlight norme errors after each saves only in `C` and `C++` files.
+
+Command:
+* `Check the norme` Check the norme on any file
+
+Checks:
+* 5 functions per file
+* 25 lines per function
+* 4 params per function
+* Multiple empty lines
+* 80 chars lines
+
+_More checks will be added in the future._
 
 If you want to disable **Norme Checker** (enabled by default)<br />
 Add this line to your `Settings - User`:
