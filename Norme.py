@@ -18,6 +18,7 @@ class JulooNormeChecker(sublime_plugin.TextCommand):
 
 reg_names = re.compile('^[a-z_0-9]+$')
 reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
+reg_bracket = re.compile('^\t*[\{\}]$')
 
 def strlen_tab(s):
 	l = 0
@@ -45,7 +46,7 @@ def norme_checker(view):
 			print("Norme Error: Invalid function name '" + s + "'")
 		i += 1
 		if i > 5:
-			invalids.append(r)
+			invalids.append(sublime.Region(r.begin(), r.begin()))
 		scope = sublime.Region(view.text_point(view.rowcol(r.begin())[0], 0), r.begin())
 		scope_len = strlen_tab(view.substr(scope).strip('*'))
 		if global_scope == -1:
@@ -84,6 +85,7 @@ def norme_checker(view):
 # Multiple empty lines
 # 80 chars per lines
 # Bad include
+# Bracket line
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	last_empty = False
@@ -103,6 +105,10 @@ def norme_checker(view):
 			if re.match(reg_include, line):
 				invalids.append(r)
 				print("Norme Error: Bad include")
+			if line.count('{') > 0 or line.count('}') > 0:
+				if not re.match(reg_bracket, line):
+					invalids.append(r)
+					print("Norme Error: Invalid bracket line")
 #
 # Slash comment
 #

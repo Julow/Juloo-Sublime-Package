@@ -88,6 +88,7 @@ Checks:
 * Bad include
 * Function scope bad align
 * Slash comment
+* Bracket line
 
 _More checks will be added in the future._
 
