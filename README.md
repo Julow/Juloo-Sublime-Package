@@ -92,6 +92,7 @@ Checks:
 * Comma space
 * Keyword space
 * Operator space
+* Comment formating
 
 _More checks will be added in the future._
 

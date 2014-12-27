@@ -35,6 +35,9 @@ def strlen_tab(s):
 
 def norme_checker(view):
 	invalids = []
+	h_file = False
+	if view.file_name() != None and view.file_name().endswith(".h"):
+		h_file = True
 #
 # 5 functions per file
 # Invalid function name
@@ -49,7 +52,7 @@ def norme_checker(view):
 			invalids.append(r)
 			print("Norme Error: Invalid function name '" + s + "'")
 		i += 1
-		if i > 5:
+		if not h_file and i > 5:
 			invalids.append(sublime.Region(r.begin(), r.begin()))
 		scope = sublime.Region(view.text_point(view.rowcol(r.begin())[0], 0), r.begin())
 		scope_len = strlen_tab(view.substr(scope).strip('*'))
@@ -58,7 +61,7 @@ def norme_checker(view):
 		elif global_scope != scope_len:
 			invalids.append(scope)
 			print("Norme Error: Function " + s + " bad align (" + str(scope_len) + ")")
-	if i > 5:
+	if not h_file and i > 5:
 		print("Norme Error: " + str(i) + " functions")
 #
 # 25 lines per function
@@ -93,9 +96,11 @@ def norme_checker(view):
 # Comma space
 # Keyword space
 # Operator space
+# Comment formating
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	last_empty = False
+	in_comment = False
 	for r in regions:
 		line = view.substr(r)
 		if len(line) == 0:
@@ -109,25 +114,34 @@ def norme_checker(view):
 			if l > 80:
 				invalids.append(sublime.Region(r.begin() + 80 - (line.count('\t') * 3), r.end()))
 				print("Norme Error: " + str(l) + " chars in a line")
-			if re.match(reg_include, line):
-				invalids.append(r)
-				print("Norme Error: Bad include")
-			reg = re.search(reg_trail, line)
-			if reg != None:
-				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
-				print("Norme Error: Trailing space")
-			commas = re.finditer(reg_comma, line)
-			for reg in commas:
-				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
-				print("Norme Error: Comma not followed by space")
-			keywords = re.finditer(reg_keyword, line)
-			for reg in keywords:
-				invalids.append(sublime.Region(r.begin() + reg.start() + 1, r.begin() + reg.end()))
-				print("Norme Error: Keyword not followed by space")
-			ops = re.finditer(reg_op, line)
-			for reg in ops:
-				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
-				print("Norme Error: Operator not followed by space")
+			if view.scope_name(r.begin()).find("comment.block.c") >= 0:
+				in_comment = True
+			else:
+				in_comment = False
+			if in_comment:
+				if not line.startswith("** ") and not line == "/*" and not line == "*/":
+					invalids.append(r)
+					print("Norme Error: Comment not well formated")
+			else:
+				if re.match(reg_include, line):
+					invalids.append(r)
+					print("Norme Error: Bad include")
+				reg = re.search(reg_trail, line)
+				if reg != None:
+					invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
+					print("Norme Error: Trailing space")
+				commas = re.finditer(reg_comma, line)
+				for reg in commas:
+					invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
+					print("Norme Error: Comma not followed by space")
+				keywords = re.finditer(reg_keyword, line)
+				for reg in keywords:
+					invalids.append(sublime.Region(r.begin() + reg.start() + 1, r.begin() + reg.end()))
+					print("Norme Error: Keyword not followed by space")
+				ops = re.finditer(reg_op, line)
+				for reg in ops:
+					invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
+					print("Norme Error: Operator not followed by space")
 #
 # Slash comment
 #
