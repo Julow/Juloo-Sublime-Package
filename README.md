@@ -95,6 +95,8 @@ Checks:
 * Operator space
 * Comment formating
 * 42 header
+* Struct name
+* Struct tab
 
 _More checks will be added in the future._
 

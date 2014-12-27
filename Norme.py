@@ -71,6 +71,19 @@ def norme_checker(view):
 	if not h_file and i > 5:
 		print("Norme Error: " + str(i) + " functions")
 #
+# Struct name
+# Struct tab
+#
+	regions = view.find_by_selector("meta.class-struct-block entity.name.type")
+	for r in regions:
+		s = view.substr(r)
+		if not re.match(reg_names, s):
+			invalids.append(r)
+			print("Norme Error: Invalid struct name '" + s + "'")
+		if view.substr(r.begin() - 1) != '\t' and view.substr(r.end()) != '\t':
+			invalids.append(sublime.Region(r.begin() - 1, r.begin()))
+			print("Norme Error: No tab before struct name")
+#
 # 25 lines per function
 #
 	regions = view.find_by_selector("meta.function.c meta.block.c")
