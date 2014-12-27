@@ -43,10 +43,16 @@ def clear_checks(view):
 
 def norme_checker(view):
 	scope = view.scope_name(0)
+	invalids = []
 	if scope.find("source.c") >= 0:
-		c_checker(view)
+		invalids += c_checker(view)
 	elif scope.find("source.makefile") >= 0:
-		makefile_checker(view)
+		invalids += makefile_checker(view)
+	if len(invalids) > 0:
+		view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
+		view.set_status("norme_juloo", "Norme errors: " + str(len(invalids)))
+	else:
+		clear_checks(view)
 
 def makefile_checker(view):
 	invalids = []
@@ -63,13 +69,30 @@ def makefile_checker(view):
 		invalids.append(sublime.Region(view.size(), view.size()))
 		print("Norme Error: Makefile required '" + q + "' rule")
 #
-# End
+# 80 chars in a line
+# 42 header
 #
-	if len(invalids) > 0:
-		view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
-		view.set_status("norme_juloo", "Norme errors: " + str(len(invalids)))
-	else:
-		clear_checks(view)
+	regions = view.lines(sublime.Region(0, view.size()));
+	in_comment = False
+	header = True
+	line_i = 0
+	for r in regions:
+		line = view.substr(r)
+		l = strlen_tab(line)
+		if l > 80:
+			invalids.append(sublime.Region(r.begin() + 80 - (line.count('\t') * 3), r.end()))
+			print("Norme Error: " + str(l) + " chars in a line")
+		if view.scope_name(r.begin()).find("comment.line") >= 0:
+			in_comment = True
+		else:
+			in_comment = False
+		if not in_comment and header:
+			if line_i < 11:
+				invalids.append(sublime.Region(r.begin(), r.begin()))
+				print("Norme Error: 42 header not a top of file")
+			header = False
+		line_i += 1
+	return invalids
 
 def c_checker(view):
 	invalids = []
@@ -221,11 +244,4 @@ def c_checker(view):
 	if len(regions) > 0:
 		invalids += regions
 		print("Norme Error: Slash comments")
-#
-# End
-#
-	if len(invalids) > 0:
-		view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
-		view.set_status("norme_juloo", "Norme errors: " + str(len(invalids)))
-	else:
-		clear_checks(view)
+	return invalids

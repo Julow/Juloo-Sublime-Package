@@ -84,7 +84,7 @@ Checks:
 * 25 lines per function
 * 4 params per function
 * Multiple empty lines
-* 80 chars per lines
+* 80 chars per lines (C, Makefile)
 * Invalid function name
 * Bad include
 * Function scope bad align
@@ -94,7 +94,7 @@ Checks:
 * Keyword space
 * Operator space
 * Comment formating
-* 42 header
+* 42 header (C, Makefile)
 * Struct name
 * Struct tab
 * Named param or void
