@@ -88,7 +88,6 @@ Checks:
 * Bad include
 * Function scope bad align
 * Slash comment
-* Bracket line
 * Trailing space
 * Comma space
 * Keyword space

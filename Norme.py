@@ -18,7 +18,6 @@ class JulooNormeChecker(sublime_plugin.TextCommand):
 
 reg_names = re.compile('^[a-z_0-9]+$')
 reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
-reg_bracket = re.compile('^\t*[\{\}]$')
 reg_trail = re.compile('\s+$')
 reg_comma = re.compile('[,;][^ ]')
 reg_keyword = re.compile('\s(if|while|else|return|break|continue|union|enum|struct)[\(;]')
@@ -90,7 +89,6 @@ def norme_checker(view):
 # Multiple empty lines
 # 80 chars per lines
 # Bad include
-# Bracket line
 # Trailing space
 # Comma space
 # Keyword space
@@ -114,10 +112,6 @@ def norme_checker(view):
 			if re.match(reg_include, line):
 				invalids.append(r)
 				print("Norme Error: Bad include")
-			if line.count('{') > 0 or line.count('}') > 0:
-				if not re.match(reg_bracket, line):
-					invalids.append(r)
-					print("Norme Error: Invalid bracket line")
 			reg = re.search(reg_trail, line)
 			if reg != None:
 				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
