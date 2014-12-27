@@ -91,6 +91,8 @@ Checks:
 * Bracket line
 * Trailing space
 * Comma space
+* Keyword space
+* Operator space
 
 _More checks will be added in the future._
 

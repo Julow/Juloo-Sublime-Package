@@ -21,6 +21,9 @@ reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
 reg_bracket = re.compile('^\t*[\{\}]$')
 reg_trail = re.compile('\s+$')
 reg_comma = re.compile('[,;][^ ]')
+reg_keyword = re.compile('\s(if|while|else|return|break|continue|union|enum|struct)[\(;]')
+ops = '(&&|&=|\|=|\|\||\+=|-=|/=|\*=|\^=|==|\?)'
+reg_op = re.compile(ops + '[^ ]|[^ ]' + ops)
 
 def strlen_tab(s):
 	l = 0
@@ -90,6 +93,8 @@ def norme_checker(view):
 # Bracket line
 # Trailing space
 # Comma space
+# Keyword space
+# Operator space
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	last_empty = False
@@ -121,6 +126,14 @@ def norme_checker(view):
 			for reg in commas:
 				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
 				print("Norme Error: Comma not followed by space")
+			keywords = re.finditer(reg_keyword, line)
+			for reg in keywords:
+				invalids.append(sublime.Region(r.begin() + reg.start() + 1, r.begin() + reg.end()))
+				print("Norme Error: Keyword not followed by space")
+			ops = re.finditer(reg_op, line)
+			for reg in ops:
+				invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
+				print("Norme Error: Operator not followed by space")
 #
 # Slash comment
 #
