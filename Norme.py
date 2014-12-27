@@ -50,6 +50,7 @@ def norme_checker(view):
 # 5 functions per file
 # Invalid function name
 # Function scope bad align
+# Line between function
 #
 	regions = view.find_by_selector("meta.function.c entity.name.function.c")
 	i = 0
@@ -62,13 +63,18 @@ def norme_checker(view):
 		i += 1
 		if not h_file and i > 5:
 			invalids.append(sublime.Region(r.begin(), r.begin()))
-		scope = sublime.Region(view.text_point(view.rowcol(r.begin())[0], 0), r.begin())
+		row = view.rowcol(r.begin())[0]
+		scope = sublime.Region(view.text_point(row, 0), r.begin())
 		scope_len = strlen_tab(view.substr(scope).strip('*'))
 		if global_scope == -1:
 			global_scope = scope_len
 		elif global_scope != scope_len:
 			invalids.append(scope)
 			print("Norme Error: Function " + s + " bad align (" + str(scope_len) + ")")
+		line = view.line(view.text_point(row - 1, 0))
+		if row > 1 and not h_file and len(view.substr(line)) > 0:
+			invalids.append(line)
+			print("Norme Error: Must have a line between functions")
 	if not h_file and i > 5:
 		print("Norme Error: " + str(i) + " functions")
 #

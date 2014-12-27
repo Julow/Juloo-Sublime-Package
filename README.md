@@ -98,6 +98,7 @@ Checks:
 * Struct name
 * Struct tab
 * Named param or void
+* Line between function
 
 _More checks will be added in the future._
 
