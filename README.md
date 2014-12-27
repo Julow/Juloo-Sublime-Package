@@ -93,6 +93,7 @@ Checks:
 * Keyword space
 * Operator space
 * Comment formating
+* 42 header
 
 _More checks will be added in the future._
 

@@ -20,8 +20,8 @@ reg_names = re.compile('^[a-z_0-9]+$')
 reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
 reg_trail = re.compile('\s+$')
 reg_comma = re.compile('[,;][^ ]')
-reg_keyword = re.compile('\s(if|while|else|return|break|continue|union|enum|struct)[\(;]')
-ops = '(&&|&=|\|=|\|\||\+=|-=|/=|\*=|\^=|==|\?)'
+reg_keyword = re.compile('^\s*(if|while|else|return|break|continue|union|enum|struct)[^ ]')
+ops = '(&&|&=|\|=|\|\||\+=|-=|/=|\*=|\^=|==|\?|:)'
 reg_op = re.compile(ops + '[^ ]|[^ ]' + ops)
 
 def strlen_tab(s):
@@ -97,12 +97,19 @@ def norme_checker(view):
 # Keyword space
 # Operator space
 # Comment formating
+# 42 header
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	last_empty = False
 	in_comment = False
+	header = True
+	line_i = 0
 	for r in regions:
 		line = view.substr(r)
+		if view.scope_name(r.begin()).find("comment.block.c") >= 0:
+			in_comment = True
+		else:
+			in_comment = False
 		if len(line) == 0:
 			if last_empty:
 				invalids.append(sublime.Region(r.begin(), r.end() + 1));
@@ -114,12 +121,8 @@ def norme_checker(view):
 			if l > 80:
 				invalids.append(sublime.Region(r.begin() + 80 - (line.count('\t') * 3), r.end()))
 				print("Norme Error: " + str(l) + " chars in a line")
-			if view.scope_name(r.begin()).find("comment.block.c") >= 0:
-				in_comment = True
-			else:
-				in_comment = False
 			if in_comment:
-				if not line.startswith("** ") and not line == "/*" and not line == "*/":
+				if not header and not line.startswith("** ") and not line == "/*" and not line == "*/":
 					invalids.append(r)
 					print("Norme Error: Comment not well formated")
 			else:
@@ -142,6 +145,12 @@ def norme_checker(view):
 				for reg in ops:
 					invalids.append(sublime.Region(r.begin() + reg.start(), r.begin() + reg.end()))
 					print("Norme Error: Operator not followed by space")
+		if not in_comment and header:
+			if line_i < 11:
+				invalids.append(sublime.Region(r.begin(), r.begin()))
+				print("Norme Error: 42 header not a top of file")
+			header = False
+		line_i += 1
 #
 # Slash comment
 #
