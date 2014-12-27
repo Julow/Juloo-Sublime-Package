@@ -6,15 +6,18 @@ import sublime, sublime_plugin, re, math
 class JulooNorme(sublime_plugin.EventListener):
 
 	def on_post_save_async(self, view):
-		if view.settings().get("juloo_norme_check", True) and "C++/C" in view.settings().get("syntax"):
+		if view.settings().get("juloo_norme_check", False) and "C++/C" in view.settings().get("syntax"):
 			norme_checker(view)
 		else:
-			view.erase_regions("norme_errors")
+			clear_checks(view)
 
 class JulooNormeChecker(sublime_plugin.TextCommand):
 
 	def run(self, edit, **args):
-		norme_checker(self.view)
+		if args["action"] == "check":
+			norme_checker(self.view)
+		elif args["action"] == "clear":
+			clear_checks(self.view)
 
 reg_names = re.compile('^[a-z_0-9]+$')
 reg_include = re.compile('[^#]*# *include *["<].*\.[^h][">"].*')
@@ -32,6 +35,10 @@ def strlen_tab(s):
 		else:
 			l += 1
 	return (l)
+
+def clear_checks(view):
+	view.erase_regions("norme_errors")
+	view.erase_status("norme_juloo")
 
 def norme_checker(view):
 	invalids = []
@@ -162,3 +169,7 @@ def norme_checker(view):
 # End
 #
 	view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
+	if len(invalids) > 0:
+		view.set_status("norme_juloo", "Norme errors: " + str(len(invalids)))
+	else:
+		view.erase_status("norme_juloo")

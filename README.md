@@ -77,6 +77,7 @@ _Errors are also print to the Sublime Text console._
 
 Command:
 * `Check the norme` Check the norme on any file
+* `Clear norme errors` Remove all highlights
 
 Checks:
 * 5 functions per file
@@ -97,12 +98,12 @@ Checks:
 
 _More checks will be added in the future._
 
-If you want to disable **Norme Checker** (enabled by default)<br />
+If you want to **enable** Norme Checker on save (disabled by default)<br />
 Add this line into your `Settings - User`:
 
 ```js
-	// Disable Norme Checker
-	"juloo_norme_check": false
+	// Enable Norme Checker on save
+	"juloo_norme_check": true
 ```
 
 ### Status bar
