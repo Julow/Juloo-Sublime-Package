@@ -26,6 +26,7 @@ reg_comma = re.compile('[,;][^ ]')
 reg_keyword = re.compile('^\s*(if|while|else|return|break|continue|union|enum|struct)[^ ]')
 ops = '(&&|&=|\|=|\|\||\+=|-=|/=|\*=|\^=|==|\?|:)'
 reg_op = re.compile(ops + '[^ ]|[^ ]' + ops)
+reg_param0 = re.compile('\(\s*(\.\.\.)?\s*\)')
 
 def strlen_tab(s):
 	l = 0
@@ -96,18 +97,24 @@ def norme_checker(view):
 			print("Norme Error: " + str(b[0] - a[0] - 1) + " lines in a function")
 #
 # 4 function params
+# Named param or void
 #
 	regions = view.find_by_selector("meta.function.c meta.parens.c");
 	for r in regions:
-		params = view.substr(r).split(",");
-		if len(params) > 4:
-			l = 0;
-			i = 0;
-			while i < 4:
-				l += len(params[i]) + 1;
-				i += 1
-			invalids.append(sublime.Region(r.begin() + l, r.end() - 1))
-			print("Norme Error: " + str(len(params)) + " params in a function")
+		s = view.substr(r)
+		if re.match(reg_param0, s):
+			invalids.append(r)
+			print("Norme Error: Function must have a named param or 'void'")
+		else:
+			params = s.split(",");
+			if len(params) > 4:
+				l = 0;
+				i = 0;
+				while i < 4:
+					l += len(params[i]) + 1;
+					i += 1
+				invalids.append(sublime.Region(r.begin() + l, r.end() - 1))
+				print("Norme Error: " + str(len(params)) + " params in a function")
 #
 # Multiple empty lines
 # 80 chars per lines

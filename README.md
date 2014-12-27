@@ -97,6 +97,7 @@ Checks:
 * 42 header
 * Struct name
 * Struct tab
+* Named param or void
 
 _More checks will be added in the future._
 
