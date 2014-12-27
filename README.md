@@ -100,6 +100,7 @@ Checks:
 * Named param or void
 * Line between function
 * $(NAME), all, clean, fclean, re (Makefile)
+* Wildcard (Makefile)
 
 _More checks will be added in the future._
 

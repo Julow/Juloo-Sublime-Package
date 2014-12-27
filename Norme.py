@@ -71,6 +71,7 @@ def makefile_checker(view):
 #
 # 80 chars in a line
 # 42 header
+# Wildcard
 #
 	regions = view.lines(sublime.Region(0, view.size()));
 	in_comment = False
@@ -91,6 +92,11 @@ def makefile_checker(view):
 				invalids.append(sublime.Region(r.begin(), r.begin()))
 				print("Norme Error: 42 header not a top of file")
 			header = False
+		if not header:
+			i = line.find('*')
+			if i >= 0:
+				invalids.append(sublime.Region(r.begin() + i, r.begin() + i + 1))
+				print("Norme Error: Wildcard not allowed in Makefile")
 		line_i += 1
 	return invalids
 
