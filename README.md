@@ -99,6 +99,7 @@ Checks:
 * Struct tab
 * Named param or void
 * Line between function
+* $(NAME), all, clean, fclean, re (Makefile)
 
 _More checks will be added in the future._
 

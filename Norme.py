@@ -42,6 +42,36 @@ def clear_checks(view):
 	view.erase_status("norme_juloo")
 
 def norme_checker(view):
+	scope = view.scope_name(0)
+	if scope.find("source.c") >= 0:
+		c_checker(view)
+	elif scope.find("source.makefile") >= 0:
+		makefile_checker(view)
+
+def makefile_checker(view):
+	invalids = []
+#
+# $(NAME), all, clean, fclean, re
+#
+	regions = view.find_by_selector("meta.function.makefile entity.name.function.makefile")
+	required = ["$(NAME)", "all", "clean", "fclean", "re"]
+	for r in regions:
+		s = view.substr(r).strip(':')
+		if s in required:
+			required.remove(s)
+	for q in required:
+		invalids.append(sublime.Region(view.size(), view.size()))
+		print("Norme Error: Makefile required '" + q + "' rule")
+#
+# End
+#
+	if len(invalids) > 0:
+		view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
+		view.set_status("norme_juloo", "Norme errors: " + str(len(invalids)))
+	else:
+		clear_checks(view)
+
+def c_checker(view):
 	invalids = []
 	h_file = False
 	if view.file_name() != None and view.file_name().endswith(".h"):
@@ -194,8 +224,8 @@ def norme_checker(view):
 #
 # End
 #
-	view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
 	if len(invalids) > 0:
+		view.add_regions("norme_errors", invalids, "source invalid.norme", "circle", sublime.DRAW_NO_OUTLINE)
 		view.set_status("norme_juloo", "Norme errors: " + str(len(invalids)))
 	else:
-		view.erase_status("norme_juloo")
+		clear_checks(view)
