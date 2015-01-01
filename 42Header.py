@@ -4,7 +4,8 @@ from time import gmtime, strftime
 #
 # Insert and update the 42 header
 #
-c_header = """/* ************************************************************************** */
+headers = [
+	("C++", """/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   %-50s :+:      :+:    :+:   */
@@ -15,7 +16,20 @@ c_header = """/* ***************************************************************
 /*   Updated: %-39s ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-"""
+"""),
+	("Makefile", """# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    %-50s :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: %-42s +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: %-40s #+#    #+#              #
+#    Updated: %-39s ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+""")
+]
 
 reg_file = re.compile('^[^ ]+ +([^ ]+)')
 reg_by = re.compile('^[^ ]+ +By: ([^ ]+) <([^>]+)>')
@@ -24,12 +38,17 @@ reg_updated = re.compile('^[^ ]+ +Updated: ([^ ]+ [^ ]+) by ([^ ]+)')
 
 class Header42():
 
+	pattern = None
+
 	lines = []
 	name = ""
 	by = ("", "")
 	creator = ("", "")
 	updater = ("", "")
 	valid = False
+
+	def __init__(self, pattern):
+		self.pattern = pattern
 
 	def set(self, user):
 		self.by = (user, user + "@student.42.fr")
@@ -59,7 +78,7 @@ class Header42():
 		by = "%s <%s>" % self.by
 		creator = "%s by %s" % self.creator
 		updater = "%s by %s" % self.updater
-		return c_header % (self.name, by, creator, updater)
+		return self.pattern % (self.name, by, creator, updater)
 
 	def update(self, view):
 		self.name = view.file_name().split('/')[-1]
@@ -77,7 +96,7 @@ class JulooHeaderCommand(sublime_plugin.TextCommand):
 		if args["action"] == "update":
 			update_header(self.view)
 		else:
-			header = Header42()
+			header = Header42(get_header_pattern(self.view))
 			user = self.view.settings().get("header_pseudo", "Unknown")
 			if user == "Unknown":
 				print("Please configure your name")
@@ -101,11 +120,21 @@ class JulooWriteCommand(sublime_plugin.TextCommand):
 def get_42_time():
 	return strftime("%Y/%m/%d %H:%M:%S", gmtime())
 
+def get_header_pattern(view):
+	for h in headers:
+		if h[0] in view.settings().get("syntax"):
+			return h[1]
+	return None
+
 def update_header(view):
+	pattern = get_header_pattern(view)
+	if pattern == None:
+		print("Warning: Language " + view.settings().get("syntax") + " not supported")
+		return
 	region = sublime.Region(0, view.text_point(11, 0))
 	substr = view.substr(region)
-	if substr.startswith(c_header[:247]) and substr.endswith(c_header[590:]):
-		header = Header42()
+	if substr.startswith(pattern[:247]) and substr.endswith(pattern[590:]):
+		header = Header42(pattern)
 		header.parse(substr.split('\n'))
 		if header.valid:
 			header.update(view)
