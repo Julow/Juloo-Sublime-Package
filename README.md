@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [Norme Checker](#norme-checker) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [Norme Checker](#norme-checker) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -12,6 +12,25 @@ or download it manually.
 If you want to update the package, use `git pull origin master`.
 
 ## Content
+
+### 42 Header
+
+Insert and update the **42 header** in source files (.c)
+
+This plugin cannot know your name<br />
+Add this line into your `Settings - User` to configure your user name:
+
+```js
+	"header_pseudo": "your name"
+```
+
+If you want to disable 42 Header on save (enabled by default)<br />
+Add this line into your `Settings - User`:
+
+```js
+	// Disable 42 Header on save
+	"juloo_42_header": false
+```
 
 ### Color Highlight
 
