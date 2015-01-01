@@ -1,5 +1,24 @@
 [
 	{
+		"caption": "Insert the 42 Header",
+		"command": "juloo_header",
+		"args":
+		{
+			"action": "insert"
+		}
+	},
+	{
+		"caption": "Update the 42 Header",
+		"command": "juloo_header",
+		"args":
+		{
+			"action": "update"
+		}
+	},
+
+
+
+	{
 		"caption": "Check the norme",
 		"command": "juloo_norme_checker",
 		"args":

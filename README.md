@@ -17,6 +17,10 @@ If you want to update the package, use `git pull origin master`.
 
 Insert and update the **42 header** in source files (.c)
 
+Commands:
+* `Insert the 42 Header` insert the header at the top of the file
+* `Update the 42 Header` update the header _(automatic by default)_
+
 This plugin cannot know your name<br />
 Add this line into your `Settings - User` to configure your user name:
 
