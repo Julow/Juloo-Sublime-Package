@@ -21,9 +21,7 @@ Commands:
 * `Insert the 42 Header` insert the header at the top of the file
 * `Update the 42 Header` update the header _(automatic by default)_
 
-Supported syntax:
-* `C` / `C++`
-* `Makefile`
+Support `C`, `C++`, `Makefile`, `JS`, `Java`, `Python`, `AS`, `CSS`, `Shell`
 
 This plugin cannot know your name<br />
 Add this line into your `Settings - User` to configure your user name:

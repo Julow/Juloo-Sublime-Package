@@ -5,7 +5,7 @@ from time import gmtime, strftime
 # Insert and update the 42 header
 #
 headers = [
-	("C++", """/* ************************************************************************** */
+	(["C++", "Java", "JavaScript", "ActionScript", "CSS"], """/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   %-50s :+:      :+:    :+:   */
@@ -17,7 +17,7 @@ headers = [
 /*                                                                            */
 /* ************************************************************************** */
 """),
-	("Makefile", """# **************************************************************************** #
+	(["Makefile", "Python", "Shell"],"""# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    %-50s :+:      :+:    :+:    #
@@ -121,15 +121,15 @@ def get_42_time():
 	return strftime("%Y/%m/%d %H:%M:%S", gmtime())
 
 def get_header_pattern(view):
-	for h in headers:
-		if h[0] in view.settings().get("syntax"):
-			return h[1]
+	for pattern in headers:
+		for l in pattern[0]:
+			if l in view.settings().get("syntax"):
+				return pattern[1]
 	return None
 
 def update_header(view):
 	pattern = get_header_pattern(view)
 	if pattern == None:
-		print("Warning: Language " + view.settings().get("syntax") + " not supported")
 		return
 	region = sublime.Region(0, view.text_point(11, 0))
 	substr = view.substr(region)
