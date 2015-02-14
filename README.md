@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [Norme Checker](#norme-checker) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Norme Checker](#norme-checker) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -93,6 +93,10 @@ Contains **3** color schemes:
 * `Juloo4` A _black_ color scheme
 
 You can switch color schemes using the `Preferences / Color Scheme` menu.
+
+### ASM Syntax
+
+Contains syntax highlight for **ASM** language.
 
 ### Norme Checker
 
