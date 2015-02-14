@@ -86,10 +86,11 @@ Write a snippet trigger and press **tab**. Press **tab** again to switch field.
 
 ### Color Schemes
 
-Contains **2** color schemes:
+Contains **3** color schemes:
 
 * `Juloo2` A _dark_ color scheme
 * `Juloo3` A _light_ color scheme
+* `Juloo4` A _black_ color scheme
 
 You can switch color schemes using the `Preferences / Color Scheme` menu.
 
