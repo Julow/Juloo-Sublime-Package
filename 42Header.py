@@ -1,5 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    42Header.py                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
+#    Updated: 2015/02/24 01:03:45 by jaguillo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 import sublime, sublime_plugin, re
-from time import gmtime, strftime
+from time import localtime, strftime
 
 #
 # Insert and update the 42 header
@@ -142,7 +154,7 @@ class JulooWriteCommand(sublime_plugin.TextCommand):
 			self.view.insert(edit, args["point"], args["data"])
 
 def get_42_time():
-	return strftime("%Y/%m/%d %H:%M:%S", gmtime())
+	return strftime("%Y/%m/%d %H:%M:%S", localtime())
 
 def get_header_pattern(view):
 	for pattern in headers:
