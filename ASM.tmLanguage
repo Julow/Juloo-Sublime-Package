@@ -5,6 +5,8 @@
 	<array>
 		<string>s</string>
 		<string>S</string>
+		<string>asm</string>
+		<string>ASM</string>
 	</array>
 	<key>name</key>
 	<string>ASM</string>
@@ -14,9 +16,33 @@
 	<array>
 		<dict>
 			<key>match</key>
-			<string>;.*$</string>
+			<string>(;).*$</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.asm</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>comment.asm</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>end</key>
+			<string>\*/</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.asm</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>comment.block.asm</string>
 		</dict>
 		<dict>
 			<key>match</key>
