@@ -70,7 +70,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>global|extern</string>
+			<string>\.?(global|extern|section)</string>
 			<key>name</key>
 			<string>storage.type.function.asm</string>
 		</dict>
