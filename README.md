@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Norme Checker](#norme-checker) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -97,50 +97,6 @@ You can switch color schemes using the `Preferences / Color Scheme` menu.
 ### ASM Syntax
 
 Contains syntax highlight for **ASM** language.
-
-### Norme Checker
-
-Highlight norme errors.
-
-Check and highlight norme errors after each saves only in `C` and `C++` files.<br />
-_Errors are also print to the Sublime Text console._
-
-Command:
-* `Check the norme` Check the norme on any file
-* `Clear norme errors` Remove all highlights
-
-Checks:
-* 5 functions per file
-* 25 lines per function
-* 4 params per function
-* Multiple empty lines
-* 80 chars per lines (C, Makefile)
-* Invalid function name
-* Bad include
-* Function scope bad align
-* Slash comment
-* Trailing space
-* Comma space
-* Keyword space
-* Operator space
-* Comment formating
-* 42 header (C, Makefile)
-* Struct name
-* Struct tab
-* Named param or void
-* Line between function
-* $(NAME), all, clean, fclean, re (Makefile)
-* Wildcard (Makefile)
-
-_More checks will be added in the future._
-
-If you want to **enable** Norme Checker on save (disabled by default)<br />
-Add this line into your `Settings - User`:
-
-```js
-	// Enable Norme Checker on save
-	"juloo_norme_check": true
-```
 
 ### Status bar
 
