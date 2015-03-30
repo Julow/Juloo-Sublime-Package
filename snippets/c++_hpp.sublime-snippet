@@ -1,0 +1,27 @@
+<snippet>
+	<description>C++ Class hpp</description>
+	<content><![CDATA[
+#ifndef ${TM_FILENAME/(.*).h(pp)?/$1/}_H
+# define ${TM_FILENAME/(.*).h(pp)?/$1/}_H
+
+class ${TM_FILENAME/(.*).h(pp)?/$1/}
+{
+public:
+	${TM_FILENAME/(.*).h(pp)?/$1/}();
+	${TM_FILENAME/(.*).h(pp)?/$1/}(${TM_FILENAME/(.*).h(pp)?/$1/} const &src);
+	~${TM_FILENAME/(.*).h(pp)?/$1/}();
+
+	${TM_FILENAME/(.*).h(pp)?/$1/}			&operator=(${TM_FILENAME/(.*).h(pp)?/$1/} const &src);
+
+protected:
+
+private:
+	${TM_FILENAME/(.*).h(pp)?/$1/}();
+}
+
+#endif
+
+]]></content>
+	<tabTrigger>hpp</tabTrigger>
+	<scope>source.c, source.c++</scope>
+</snippet>

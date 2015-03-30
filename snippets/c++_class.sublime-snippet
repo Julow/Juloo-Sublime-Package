@@ -1,0 +1,15 @@
+<snippet>
+	<description>C++ Class</description>
+	<content><![CDATA[
+#include "${TM_FILENAME/(.*).c(pp)?/$1/}.hpp"
+
+${TM_FILENAME/(.*).c(pp)?/$1/}::${TM_FILENAME/(.*).c(pp)?/$1/}();
+${TM_FILENAME/(.*).c(pp)?/$1/}::${TM_FILENAME/(.*).c(pp)?/$1/}(${TM_FILENAME/(.*).c(pp)?/$1/} const &src);
+${TM_FILENAME/(.*).c(pp)?/$1/}::~${TM_FILENAME/(.*).c(pp)?/$1/}();
+
+${TM_FILENAME/(.*).c(pp)?/$1/}			${TM_FILENAME/(.*).c(pp)?/$1/}::&operator=(${TM_FILENAME/(.*).c(pp)?/$1/} const &src);
+
+]]></content>
+	<tabTrigger>class</tabTrigger>
+	<scope>source.c, source.c++</scope>
+</snippet>

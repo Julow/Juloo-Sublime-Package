@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:07 by jaguillo          #+#    #+#              #
-#    Updated: 2015/02/24 01:04:08 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/03/26 13:44:52 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -177,10 +177,10 @@ class Color():
 		return h
 
 	def contrasted_hex(self):
-		if self.r < 10 and self.g < 10 and self.b < 10:
-			return "#FFFFFFFF"
-		else:
-			return "#000000FF"
+		# if self.r < 10 and self.g < 10 and self.b < 10:
+		# 	return "#FFFFFFFF"
+		# else:
+		return "#000000FF"
 
 lastColorRegions = None
 resourceCache = None
