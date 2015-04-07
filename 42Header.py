@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/02/24 01:03:45 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/04/07 14:16:30 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,19 +139,6 @@ class JulooHeaderCommand(sublime_plugin.TextCommand):
 			header.set(user)
 			header.update(self.view)
 			self.view.run_command("juloo_write", {"point": 0, "data": header.get()})
-
-class JulooWriteCommand(sublime_plugin.TextCommand):
-
-	def run(self, edit, **args):
-		region = None
-		if "region" in args:
-			region = sublime.Region(args["region"][0], args["region"][1])
-		if "action" in args and args["action"] == "replace":
-			self.view.replace(edit, region, args["data"])
-		elif "action" in args and args["action"] == "erase":
-			self.view.erase(edit, region)
-		else:
-			self.view.insert(edit, args["point"], args["data"])
 
 def get_42_time():
 	return strftime("%Y/%m/%d %H:%M:%S", localtime())

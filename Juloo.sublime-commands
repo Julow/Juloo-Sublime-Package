@@ -1,5 +1,21 @@
 [
 	{
+		"caption": "Insert header file (.h/.hpp) protection",
+		"command": "juloo_cheader"
+	},
+
+	{
+		"caption": "Create C++ class header (.hpp)",
+		"command": "juloo_hpp"
+	},
+	{
+		"caption": "Create C++ class (.cpp)",
+		"command": "juloo_cpp"
+	},
+
+
+
+	{
 		"caption": "Insert the 42 Header",
 		"command": "juloo_header",
 		"args":
