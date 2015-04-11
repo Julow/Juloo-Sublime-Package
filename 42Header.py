@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/07 14:16:30 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/04/12 00:40:33 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ from time import localtime, strftime
 # Insert and update the 42 header
 #
 headers = [
-	(["C++", "Java", "JavaScript", "ActionScript", "CSS", "JSON"], [], """/* ************************************************************************** */
+	(["C++", "Java", "JavaScript", "ActionScript", "CSS", "JSON"], [], 0, """/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   %-50s :+:      :+:    :+:   */
@@ -29,7 +29,7 @@ headers = [
 /*                                                                            */
 /* ************************************************************************** */
 """),
-	(["HTML", "XML"], [], """<!-- *********************************************************************** -->
+	(["HTML", "XML"], [], 0, """<!-- *********************************************************************** -->
 <!--                                                                         -->
 <!--                                                      :::      ::::::::  -->
 <!-- %-50s :+:      :+:    :+:  -->
@@ -41,7 +41,7 @@ headers = [
 <!--                                                                         -->
 <!-- *********************************************************************** -->
 """),
-	([], ["s", "asm", "i", "inc"], """;; ************************************************************************** ;;
+	([], ["s", "asm", "i", "inc"], 0, """;; ************************************************************************** ;;
 ;;                                                                            ;;
 ;;                                                        :::      ::::::::   ;;
 ;;   %-50s :+:      :+:    :+:   ;;
@@ -53,7 +53,20 @@ headers = [
 ;;                                                                            ;;
 ;; ************************************************************************** ;;
 """),
-	(["Language"], [], """# **************************************************************************** #
+	(["Shell"], [], 1, """#!/bin/bash
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    %-50s :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: %-42s +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: %-40s #+#    #+#              #
+#    Updated: %-39s ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+"""),
+	(["Language"], [], 0, """# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    %-50s :+:      :+:    :+:    #
@@ -114,7 +127,7 @@ class Header42():
 		by = "%s <%s>" % self.by
 		creator = "%s by %s" % self.creator
 		updater = "%s by %s" % self.updater
-		return self.pattern % (self.name, by, creator, updater)
+		return self.pattern[3] % (self.name, by, creator, updater)
 
 	def update(self, view):
 		self.name = view.file_name().split('/')[-1]
@@ -148,22 +161,22 @@ def get_header_pattern(view):
 		syntax = view.settings().get("syntax")
 		for l in pattern[0]:
 			if l in syntax:
-				return pattern[2]
+				return pattern
 		ext = view.file_name().lower().split('.')
 		for l in pattern[1]:
 			if l == ext[-1]:
-				return pattern[2]
+				return pattern
 	return None
 
 def update_header(view):
 	pattern = get_header_pattern(view)
 	if pattern == None:
 		return
-	region = sublime.Region(0, view.text_point(11, 0))
+	region = sublime.Region(0, view.text_point(11 + pattern[2], 0))
 	substr = view.substr(region)
-	if substr.startswith(pattern[:247]) and substr.endswith(pattern[590:]):
+	if substr.startswith(pattern[3][:247]) and substr.endswith(pattern[3][590:]):
 		header = Header42(pattern)
-		header.parse(substr.split('\n'))
+		header.parse(substr.split('\n')[pattern[2]:])
 		if header.valid:
 			header.update(view)
 			view.run_command("juloo_write", {"action": "replace", "region": (region.a, region.b), "data": header.get()})
