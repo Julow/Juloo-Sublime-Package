@@ -3,13 +3,22 @@
 	<content><![CDATA[
 #include "${TM_FILENAME/(.*).c(pp)?/$1/}.hpp"
 
-${TM_FILENAME/(.*).c(pp)?/$1/}::${TM_FILENAME/(.*).c(pp)?/$1/}();
-${TM_FILENAME/(.*).c(pp)?/$1/}::${TM_FILENAME/(.*).c(pp)?/$1/}(${TM_FILENAME/(.*).c(pp)?/$1/} const &src);
-${TM_FILENAME/(.*).c(pp)?/$1/}::~${TM_FILENAME/(.*).c(pp)?/$1/}();
+${TM_FILENAME/(.*).c(pp)?/$1/}::${TM_FILENAME/(.*).c(pp)?/$1/}(void)
+{
+}
 
-${TM_FILENAME/(.*).c(pp)?/$1/}			${TM_FILENAME/(.*).c(pp)?/$1/}::&operator=(${TM_FILENAME/(.*).c(pp)?/$1/} const &src);
+${TM_FILENAME/(.*).c(pp)?/$1/}::${TM_FILENAME/(.*).c(pp)?/$1/}(${TM_FILENAME/(.*).c(pp)?/$1/} const &src)
+{
+}
 
+${TM_FILENAME/(.*).c(pp)?/$1/}::~${TM_FILENAME/(.*).c(pp)?/$1/}(void)
+{
+}
+
+${TM_FILENAME/(.*).c(pp)?/$1/}			${TM_FILENAME/(.*).c(pp)?/$1/}::&operator=(${TM_FILENAME/(.*).c(pp)?/$1/} const &src)
+{
+}
 ]]></content>
-	<tabTrigger>class</tabTrigger>
+	<tabTrigger>cpp</tabTrigger>
 	<scope>source.c, source.c++</scope>
 </snippet>

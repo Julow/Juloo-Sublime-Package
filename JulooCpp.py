@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/07 14:14:38 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/09 16:55:49 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/04/13 23:06:14 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ class JulooCppCommand(sublime_plugin.TextCommand):
 {
 }
 
-%(class)s			&%(class)s:operator=(%(class)s const &rhs)
+%(class)s			&%(class)s::operator=(%(class)s const &rhs)
 {
 	// *this = rhs;
 	return (*this);
