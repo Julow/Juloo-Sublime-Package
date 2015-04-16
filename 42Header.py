@@ -6,9 +6,163 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/12 00:40:33 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/04/16 19:49:16 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# import sublime, sublime_plugin, re
+
+# header_config = ([
+# 	"        :::      ::::::::",
+# 	"      :+:      :+:    :+:",
+# 	"    +:+ +:+         +:+  ",
+# 	"  +#+  +:+       +#+     ",
+# 	"+#+#+#+#+#+   +#+        ",
+# 	"     #+#    #+#          ",
+# 	"    ###   ########.fr    "], # logo
+# 	2, # top offset
+# 	2, # bottom offset
+# 	4, # max offset
+# 	[ # values (offset, regex, initial, format)
+# 		(3, '^[^ ]+ +([^ ]+)',								"%(file)s",				"%(file)s")
+# 		(5, '^[^ ]+ +By: ([^ ]+) <([^>]+)>',				"%(user)s <%(mail)s>",	"%(1)s <%(2)s>")
+# 		(7, '^[^ ]+ +Created: ([^ ]+ [^ ]+) by ([^ ]+)',	"%(date)s by %(user)s",	"%(1)s by %(2)s")
+# 		(8, '^[^ ]+ +Updated: ([^ ]+ [^ ]+) by ([^ ]+)',	"%(date)s by %(user)s",	"%(date)s by %(user)s")
+# 	]
+# ]
+
+# headers = [ # headers for language or file extension
+# 	(["C++", "Java", "JavaScript", "ActionScript", "CSS", "JSON"], [], 0, """/* ************************************************************************** */
+# /*                                                                            */
+# /*                                                        :::      ::::::::   */
+# /*   %-50s :+:      :+:    :+:   */
+# /*                                                    +:+ +:+         +:+     */
+# /*   By: %-42s +#+  +:+       +#+        */
+# /*                                                +#+#+#+#+#+   +#+           */
+# /*   Created: %-40s #+#    #+#             */
+# /*   Updated: %-39s ###   ########.fr       */
+# /*                                                                            */
+# /* ************************************************************************** */
+# """),
+# 	(["HTML", "XML"], [], 0, """<!-- *********************************************************************** -->
+# <!--                                                                         -->
+# <!--                                                      :::      ::::::::  -->
+# <!-- %-50s :+:      :+:    :+:  -->
+# <!--                                                  +:+ +:+         +:+    -->
+# <!-- By: %-42s +#+  +:+       +#+       -->
+# <!--                                              +#+#+#+#+#+   +#+          -->
+# <!-- Created: %-40s #+#    #+#            -->
+# <!-- Updated: %-39s ###   ########.fr      -->
+# <!--                                                                         -->
+# <!-- *********************************************************************** -->
+# """),
+# 	([], ["s", "asm", "i", "inc"], 0, """;; ************************************************************************** ;;
+# ;;                                                                            ;;
+# ;;                                                        :::      ::::::::   ;;
+# ;;   %-50s :+:      :+:    :+:   ;;
+# ;;                                                    +:+ +:+         +:+     ;;
+# ;;   By: %-42s +#+  +:+       +#+        ;;
+# ;;                                                +#+#+#+#+#+   +#+           ;;
+# ;;   Created: %-40s #+#    #+#             ;;
+# ;;   Updated: %-39s ###   ########.fr       ;;
+# ;;                                                                            ;;
+# ;; ************************************************************************** ;;
+# """),
+# 	(["Shell"], [], 1, """#!/bin/bash
+# # **************************************************************************** #
+# #                                                                              #
+# #                                                         :::      ::::::::    #
+# #    %-50s :+:      :+:    :+:    #
+# #                                                     +:+ +:+         +:+      #
+# #    By: %-42s +#+  +:+       +#+         #
+# #                                                 +#+#+#+#+#+   +#+            #
+# #    Created: %-40s #+#    #+#              #
+# #    Updated: %-39s ###   ########.fr        #
+# #                                                                              #
+# # **************************************************************************** #
+# """),
+# 	(["Language"], [], 0, """# **************************************************************************** #
+# #                                                                              #
+# #                                                         :::      ::::::::    #
+# #    %-50s :+:      :+:    :+:    #
+# #                                                     +:+ +:+         +:+      #
+# #    By: %-42s +#+  +:+       +#+         #
+# #                                                 +#+#+#+#+#+   +#+            #
+# #    Created: %-40s #+#    #+#              #
+# #    Updated: %-39s ###   ########.fr        #
+# #                                                                              #
+# # **************************************************************************** #
+# """)
+# ]
+
+# class Header():
+
+# 	view = None
+# 	pattern = None
+# 	offset = 0
+# 	values = {}
+
+# 	def __init__(self, view):
+# 		self.view = view
+
+# 	def update(self):
+# 		pass
+
+# 	def overwrite(self):
+# 		pass
+
+# 	def search(self):
+# 		i = 0
+# 		while i < header_config[3]:
+# 			j = 0
+# 			while j < len(header_config[0]):
+# 				linept = view.text_point(0, i + j)
+# 				line = view.substr(line(linept))
+# 				if not header_config[0][j] in line:
+# 					return False
+# 				j += 1
+# 			i += 1
+# 		self.offset = i
+# 		return True
+
+# 	def load_values(self):
+# 		self.values['file'] = view.file_name().split('/')[-1]
+# 		self.values['user'] = self.view.settings().get("header_pseudo", "Unknown")
+# 		self.values['mail'] = self.values['user'] + "@student.42.fr"
+# 		self.values['date'] = strftime("%Y/%m/%d %H:%M:%S", localtime())
+
+# 	def load_pattern(self):
+# 		syntax = self.view.settings().get("syntax")
+# 		for pattern in headers:
+# 			for l in pattern[0]:
+# 				if l in syntax:
+# 					self.pattern = pattern
+# 					return True
+# 			ext = self.view.file_name().lower().split('.')
+# 			for l in pattern[1]:
+# 				if l == ext[-1]:
+# 					self.pattern = pattern
+# 					return True
+# 		return False
+
+
+# def update_header(view):
+# 	header = Header(view)
+# 	if not header.load_pattern():
+# 		print("Header not available for this language")
+# 	elif not header.search():
+# 		print("Header not found")
+# 	else:
+# 		header.load_values()
+# 		header.update()
+# 		header.overwrite()
+
+
+# class Juloo42Header(sublime_plugin.EventListener):
+
+# 	def on_pre_save(self, view):
+# 		if view.settings().get("juloo_42_header", True):
+# 			update_header(view)
 
 import sublime, sublime_plugin, re
 from time import localtime, strftime
