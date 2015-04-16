@@ -1,0 +1,10 @@
+<snippet>
+	<name>Main(void)</name>
+	<content><![CDATA[int				main(void)
+{
+	$0
+	return (0);
+}]]></content>
+	<tabTrigger>main</tabTrigger>
+	<scope>source.c, source.c++</scope>
+</snippet>
