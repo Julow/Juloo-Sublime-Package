@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/07 14:17:39 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/04/17 00:58:41 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,15 @@ import sublime, sublime_plugin, webbrowser
 class JulooWriteCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit, **args):
-		region = None
+		if "erase" in args:
+			r = sublime.Region(args["erase"][0], args["erase"][1])
+			self.view.erase(edit, r)
+		if not "data" in args:
+			return
 		if "region" in args:
-			region = sublime.Region(args["region"][0], args["region"][1])
-		if "action" in args and args["action"] == "replace":
-			self.view.replace(edit, region, args["data"])
-		elif "action" in args and args["action"] == "erase":
-			self.view.erase(edit, region)
-		else:
+			r = sublime.Region(args["region"][0], args["region"][1])
+			self.view.replace(edit, r, args["data"])
+		elif "point" in args:
 			self.view.insert(edit, args["point"], args["data"])
 
 #
