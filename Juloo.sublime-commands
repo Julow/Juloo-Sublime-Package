@@ -1,5 +1,10 @@
 [
 	{
+		"caption": "Test test test test test",
+		"command": "juloo_test"
+	},
+
+	{
 		"caption": "[.h] Insert header file protection",
 		"command": "juloo_cheader"
 	},
