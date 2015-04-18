@@ -6,10 +6,11 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/17 01:00:38 by juloo            ###   ########.fr        #
+#    Updated: 2015/04/18 23:01:22 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+import sublime_plugin, sublime
 from time import localtime, strftime
 from re import search, compile
 from os import environ
