@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    42Header.py                                        :+:      :+:    :+:    #
+#                                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/18 23:01:22 by juloo            ###   ########.fr        #
+#    Updated: 2015/04/20 00:49:52 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,10 +95,10 @@ class Header():
 		self.view = view
 		self.values = {}
 		self.formats = []
-		if view.file_name() == None:
+		if view.name() == None:
 			self.values['file'] = "untitled"
 		else:
-			self.values['file'] = view.file_name().split('/')[-1]
+			self.values['file'] = view.name()
 		self.values['user'] = view.settings().get("pseudo", environ['USER'])
 		self.values['mail'] = view.settings().get("mail", environ['MAIL'])
 		self.values['date'] = strftime("%Y/%m/%d %H:%M:%S", localtime())
@@ -163,9 +163,9 @@ class Header():
 				if l in syntax:
 					self.pattern = pattern
 					return True
-		if self.view.file_name() != None:
+		if self.view.name() != None:
 			for pattern in headers:
-				ext = self.view.file_name().lower().split('.')
+				ext = self.view.name().lower().split('.')
 				for l in pattern[1]:
 					if l == ext[-1]:
 						self.pattern = pattern

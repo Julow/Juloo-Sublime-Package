@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/18 23:01:26 by juloo             #+#    #+#              #
-#    Updated: 2015/04/19 01:24:46 by juloo            ###   ########.fr        #
+#    Updated: 2015/04/20 00:48:48 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ import sublime_plugin, sublime
 from re import compile, search
 
 reg_member = compile('(virtual\s+)?(\w+)\s+(const\s+)?([&*])?([^~\s\(]+)\(\s*([^\)]+)\s*\)\s*(const\s*)?(?:throw\s*\(\s*([^\s\)]+)\s*\)\s*)?;');
-reg_property = compile('(\w+)\s+(const\s+)?([&*])?(\w+)\s*;');
+reg_property = compile('(static\s+)?(\w+)\s+(const\s+)?([&*])?(\w+)\s*;');
 reg_visibility = compile('(public|private|protected):')
 reg_param = compile('[\w]+\s+(const\s+)?([&*]?)(\w+)')
 
@@ -22,14 +22,16 @@ class Class():
 
 	name = None
 
+	view = None
+
 	methods = []
 	properties = []
-
-	view = None
 
 	def __init__(self, name, view):
 		self.name = name
 		self.view = view
+		self.methods = []
+		self.properties = []
 
 	def parse(self, region):
 		lines = self.view.lines(region)
@@ -46,30 +48,52 @@ class Class():
 				continue
 			m = reg_property.search(line)
 			if m != None:
-				self.properties.append(Property(m, visibility))
+				self.properties.append(Property(self, m, visibility))
 
 	def toCpp(self):
 		s = ""
 		for m in self.methods:
 			s += m.toCpp()
-			s += "\n\n"
+		for p in self.properties:
+			s += p.toCpp()
 		return s
 
 class Property():
 
+	cl = None
 	visibility = "private"
+	static = False
 	retType = ""
 	const = False
 	retRank = None
 	name = ""
 
-	def __init__(self, m, v):
+	def __init__(self, cl, m, v):
+		self.cl = cl
 		self.visibility = v
-		self.retType = m.group(1)
-		if m.group(2) != None:
+		if m.group(1) != None:
+			self.static = True
+		self.retType = m.group(2)
+		if m.group(3) != None:
 			self.const = True
-		self.retRank = m.group(3)
-		self.name = m.group(4)
+		self.retRank = m.group(4)
+		self.name = m.group(5)
+
+	def toCpp(self):
+		s = ""
+		if self.static:
+			s += "\n"
+			s += self.retType
+			if self.const:
+				s += " const"
+			s += "\t\t"
+			if self.retRank != None:
+				s += self.retRank
+			s += self.cl.name
+			s += "::"
+			s += self.name
+			s += " = NULL;\n"
+		return s
 
 class Method():
 
@@ -127,7 +151,7 @@ class Method():
 		return ""
 
 	def toCpp(self):
-		s = ""
+		s = "\n"
 		s += self.retType
 		if self.retConst:
 			s += " const"
@@ -149,19 +173,21 @@ class Method():
 			s += self.toGetter(self.name[3:].lower())
 		elif self.name.startswith("set") and len(self.args) > 4:
 			s += self.toSetter(self.name[3:].lower())
-		s += "\n}"
+		s += "\n}\n"
 		return s
 
 def test(view):
 	classes = view.find_by_selector("meta.class-struct-block.c++")
 	name = view.file_name().split('/')[-1]
 	className = name.split('.')[0]
-	name = name.replace(".cpp", ".hpp")
-	print("#include \"%s\"\n" % name)
+	cppView = view.window().new_file(0, view.settings().get("syntax"))
+	cppView.set_name(name.replace(".hpp", ".cpp"))
+	cppView.run_command("juloo_header", {"action": "insert"})
+	cppView.run_command("juloo_write", {"data": "#include \"%s\"\n" % name})
 	for c in classes:
 		cl = Class(className, view)
 		cl.parse(c)
-		print(cl.toCpp())
+		cppView.run_command("juloo_write", {"data": cl.toCpp()})
 
 class JulooTestCommand(sublime_plugin.TextCommand):
 
