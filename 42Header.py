@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#                                                       :+:      :+:    :+:    #
+#    42Header.py                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/20 00:49:52 by juloo            ###   ########.fr        #
+#    Updated: 2015/04/21 18:45:34 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,9 +98,12 @@ class Header():
 		if view.name() == None:
 			self.values['file'] = "untitled"
 		else:
-			self.values['file'] = view.name()
+			if view.file_name() == None:
+				self.values['file'] = view.name()
+			else:
+				self.values['file'] = view.file_name().split('/')[-1]
 		self.values['user'] = view.settings().get("pseudo", environ['USER'])
-		self.values['mail'] = view.settings().get("mail", environ['MAIL'])
+		self.values['mail'] = view.settings().get("mail", environ['MAIL'] if "MAIL" in environ else self.values['user'] + "@student.42.fr")
 		self.values['date'] = strftime("%Y/%m/%d %H:%M:%S", localtime())
 
 	def update(self, insert=False):
