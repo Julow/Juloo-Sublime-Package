@@ -86,6 +86,7 @@ Contains **10** snippets:
 * `e_` C enum (with typedef)
 * `#h` H file protection
 * `/*` Comment (Norme)
+* `** =` Comment separator (full line of '=')
 * `*/` Extend the comment
 * `printf` Printf and fflush
 

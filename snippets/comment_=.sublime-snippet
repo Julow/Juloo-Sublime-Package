@@ -1,0 +1,6 @@
+<snippet>
+	<name>Comment =</name>
+	<content>** ========================================================================== **</content>
+	<tabTrigger>** =</tabTrigger>
+	<scope>source.c, source.c++</scope>
+</snippet>
