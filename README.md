@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -67,6 +67,12 @@ Commands:
 * `Merge` (Merge 2 splitted views into 1)
 * `Reset` (Reset the layout: 1 view)
 
+### Cpp
+
+Commands:
+* `.hpp` Create a Coplien form class header
+* `.cpp` Create a Coplien form class
+
 ### Snippets
 
 Contains **10** snippets:
@@ -77,6 +83,7 @@ Contains **10** snippets:
 * `static` C static var/function
 * `t_` C typedef
 * `s_` C struct (with typedef)
+* `e_` C enum (with typedef)
 * `#h` H file protection
 * `/*` Comment (Norme)
 * `*/` Extend the comment
@@ -109,6 +116,11 @@ Also when you accidentally change the font size, the status bar say it: _(for 3 
 ![StatusFont](/images/status_font.png)
 
 ### Misc
+
+#### C Header protection
+
+Command:
+* `.h` Insert header protection
 
 #### Open in browser
 

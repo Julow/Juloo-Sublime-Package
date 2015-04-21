@@ -1,0 +1,9 @@
+<snippet>
+	<name>Enum</name>
+	<content><![CDATA[typedef enum	e_${1/(.*)/$1/}
+{
+	$0
+}				t_${1};]]></content>
+	<tabTrigger>e_</tabTrigger>
+	<scope>source.c, source.c++</scope>
+</snippet>
