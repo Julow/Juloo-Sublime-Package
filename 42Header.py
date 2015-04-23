@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/21 18:45:34 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/04/24 01:22:55 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ headers = [ # headers for language or file extension
 <!-- Updated: %-39s ###   ########.fr      -->
 <!--                                                                         -->
 <!-- *********************************************************************** -->"""),
-	([], ["s", "asm", "i", "inc"], """;; ************************************************************************** ;;
+	(["ASM"], ["s", "asm", "i", "inc"], """;; ************************************************************************** ;;
 ;;                                                                            ;;
 ;;                                                        :::      ::::::::   ;;
 ;;   %-50s :+:      :+:    :+:   ;;
@@ -166,9 +166,9 @@ class Header():
 				if l in syntax:
 					self.pattern = pattern
 					return True
-		if self.view.name() != None:
+		if self.view.file_name() != None:
 			for pattern in headers:
-				ext = self.view.name().lower().split('.')
+				ext = self.view.file_name().lower().split('.')
 				for l in pattern[1]:
 					if l == ext[-1]:
 						self.pattern = pattern
