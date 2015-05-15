@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/20 00:31:53 by juloo            ###   ########.fr        #
+#    Updated: 2015/05/15 17:26:47 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ import sublime, sublime_plugin, webbrowser
 # Util command
 # Write to the file
 #
-# {"erase": (a, b)} // erase region
-# {"region": (a, b), "data": "text"} // erase region and insert text
+# {"erase": {"begin": a, "end": b}} // erase region
+# {"region": {"begin": a, "end": b}, "data": "text"} // erase region and insert text
 # {"point": a, "data": "text"} // insert text
 # {"data": "text"} // insert text at cursor position
 #
@@ -25,16 +25,17 @@ class JulooWriteCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit, **args):
 		if "erase" in args:
-			r = sublime.Region(args["erase"][0], args["erase"][1])
+			print(args["erase"])
+			r = sublime.Region(int(args["erase"]["begin"]), int(args["erase"]["end"]))
 			self.view.erase(edit, r)
-		if not "data" in args:
+		if not "data" in args or args["data"] == None:
 			return
 		if "region" in args:
-			self.view.replace(edit, sublime.Region(args["region"][0], args["region"][1]), args["data"])
+			self.view.replace(edit, sublime.Region(int(args["region"]["begin"]), int(args["region"]["end"])), args["data"])
 		elif "point" in args:
-			self.view.insert(edit, args["point"], args["data"])
+			self.view.insert(edit, int(args["point"]), args["data"])
 		else:
-			self.view.insert(edit, self.view.sel()[0].begin(), args["data"])
+			self.view.insert(edit, int(self.view.sel()[0].begin()), args["data"])
 
 #
 # Show the current scope in the status bar

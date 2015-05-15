@@ -1,1 +1,3 @@
 colorHighlightCache/*
+*.pyc
+*.cache

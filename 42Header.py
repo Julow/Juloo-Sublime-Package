@@ -128,7 +128,8 @@ class Header():
 		else:
 			r = self.view.sel()[0]
 		self.view.run_command("juloo_write", {
-			"erase": (r.begin(), r.end()),
+			"erase": {"begin": r.begin(), "end": r.end()},
+			# "erase": (r.begin(), r.end()),
 			"point": r.begin(),
 			"data": self.pattern[2] % tuple(self.formats) + "\n\n"
 		})
@@ -138,7 +139,8 @@ class Header():
 		height = header_config['offsetTop'] + header_config['offsetBottom'] + len(header_config['pattern']) - 1
 		end = self.view.line(self.view.text_point(self.offset + height, 0))
 		self.view.run_command("juloo_write", {
-			"region": (start.begin(), end.end()),
+			"region": {"begin": start.begin(), "end": end.end()},
+			# "region": (start.begin(), end.end()),
 			"data": self.pattern[2] % tuple(self.formats)
 		})
 
