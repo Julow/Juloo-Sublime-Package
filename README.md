@@ -23,19 +23,20 @@ Commands:
 
 Support all languages.
 
-This plugin cannot know your name<br />
-Add this line into your `Settings - User` to configure your user name:
-
-```js
-	"header_pseudo": "your name"
-```
-
 If you want to disable 42 Header on save (enabled by default)<br />
 Add this line into your `Settings - User`:
 
 ```js
 	// Disable 42 Header on save
 	"juloo_42_header": false
+```
+
+The plugin use the environ variable to find your pseudo ($USER).<br />
+If you want to use an other name<br />
+Add this line into your `Settings - User`:
+
+```js
+	"pseudo": "your name"
 ```
 
 ### Color Highlight

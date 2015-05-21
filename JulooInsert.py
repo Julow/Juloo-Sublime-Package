@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/21 23:31:22 by juloo             #+#    #+#              #
-#    Updated: 2015/05/22 00:34:01 by juloo            ###   ########.fr        #
+#    Updated: 2015/05/22 00:40:10 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ class JulooInsertCommand(sublime_plugin.TextCommand):
 				"cmd": cmd
 			}, 'UTF-8'))
 			self.view.run_command("juloo_write", {
-				"region": [s.begin(), s.end()],
+				"region": {"begin": s.begin(), "end": s.end()},
 				"data": process.communicate()[0].decode('UTF-8')
 			})
 
@@ -49,13 +49,13 @@ class JulooInsertCommand(sublime_plugin.TextCommand):
 		if args["what"] == "line_num":
 			for s in self.view.sel():
 				self.view.run_command("juloo_write", {
-					"region": [s.begin(), s.end()],
+					"region": {"begin": s.begin(), "end": s.end()},
 					"data": "%d" % self.view.rowcol(s.begin())[0] + 1
 				})
 		elif args["what"] == "column":
 			for s in self.view.sel():
 				self.view.run_command("juloo_write", {
-					"region": [s.begin(), s.end()],
+					"region": {"begin": s.begin(), "end": s.end()},
 					"data": "%d" % self.view.rowcol(s.begin())[1] + 1
 				})
 		elif args["what"] == "shell":
