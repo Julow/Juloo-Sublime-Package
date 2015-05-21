@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -38,6 +38,28 @@ Add this line into your `Settings - User`:
 ```js
 	"pseudo": "your name"
 ```
+
+### Shell Insert
+
+Add `Insert Shell command output` command
+
+The command is executed using `bash`
+
+Before executing the command, the pwd is set to the current dir
+and some variables are set:
+
+```shell
+	"$FILE" # The current file name
+	"$LINE" # The current line number
+	"$COLUMN" # The current column number
+	"$TEXT" # The content of the selected region (or the whole line if the selection is empty)
+```
+
+Warning: If there is multiple selections, the command is executed for each cursors
+
+Also add:
+* `Insert Line number` Insert the line number
+* `Insert Column number` Insert the column index
 
 ### Color Highlight
 
