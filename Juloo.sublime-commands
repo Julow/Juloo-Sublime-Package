@@ -1,5 +1,29 @@
 [
 	{
+		"caption": "Insert: Line number",
+		"command": "juloo_insert",
+		"args": {
+			"what": "line_num"
+		}
+	},
+	{
+		"caption": "Insert: Column number",
+		"command": "juloo_insert",
+		"args": {
+			"what": "column"
+		}
+	},
+	{
+		"caption": "Insert: Shell command output",
+		"command": "juloo_insert",
+		"args": {
+			"what": "shell"
+		}
+	},
+
+
+
+	{
 		"caption": "Test test test test test",
 		"command": "juloo_test"
 	},

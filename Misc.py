@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2015/04/20 00:31:53 by juloo            ###   ########.fr        #
+#    Updated: 2015/05/22 00:36:14 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ import sublime, sublime_plugin, webbrowser
 # {"erase": (a, b)} // erase region
 # {"region": (a, b), "data": "text"} // erase region and insert text
 # {"point": a, "data": "text"} // insert text
-# {"data": "text"} // insert text at cursor position
+# {"data": "text"} // insert text at cursors positions
 #
 class JulooWriteCommand(sublime_plugin.TextCommand):
 
@@ -34,7 +34,8 @@ class JulooWriteCommand(sublime_plugin.TextCommand):
 		elif "point" in args:
 			self.view.insert(edit, args["point"], args["data"])
 		else:
-			self.view.insert(edit, self.view.sel()[0].begin(), args["data"])
+			for s in self.view.sel():
+				self.view.replace(edit, sublime.Region(s.begin(), s.end()), args["data"])
 
 #
 # Show the current scope in the status bar
