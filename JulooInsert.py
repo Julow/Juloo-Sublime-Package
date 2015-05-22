@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/21 23:31:22 by juloo             #+#    #+#              #
-#    Updated: 2015/05/22 00:40:10 by juloo            ###   ########.fr        #
+#    Updated: 2015/05/22 12:53:25 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ class JulooInsertCommand(sublime_plugin.TextCommand):
 			}, 'UTF-8'))
 			self.view.run_command("juloo_write", {
 				"region": {"begin": s.begin(), "end": s.end()},
-				"data": process.communicate()[0].decode('UTF-8')
+				"data": process.communicate()[0].decode('UTF-8').strip('\n')
 			})
 
 	def run(self, edit, **args):

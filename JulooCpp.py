@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/07 14:14:38 by jaguillo          #+#    #+#              #
-#    Updated: 2015/05/15 17:38:05 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/05/22 14:48:05 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ class JulooHppCommand(sublime_plugin.TextCommand):
 		className = name.split('.')[0]
 		hdef = ''.join([i if ord(i) >= ord('A') and ord(i) <= ord('Z') else '_' for i in name.upper()])
 		template = h_class_template
-		if ord(className[1]) >= ord('A') and ord(i) <= ord('Z'):
+		if ord(className[1]) >= ord('A') and ord(className[1]) <= ord('Z'):
 			if className[0] == 'I':
 				template = h_interface_template
 			elif className[0] == 'E':
