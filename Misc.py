@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2015/05/22 00:39:57 by juloo            ###   ########.fr        #
+#    Updated: 2015/05/29 00:18:13 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ class JulooWriteCommand(sublime_plugin.TextCommand):
 			self.view.insert(edit, int(args["point"]), args["data"])
 		else:
 			for s in self.view.sel():
-				self.view.replace(edit, sublime.Region(int(args["region"]["begin"]), int(args["region"]["end"])), args["data"])
+				self.view.replace(edit, s, args["data"])
 
 #
 # Show the current scope in the status bar
