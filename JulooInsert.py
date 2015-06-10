@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/21 23:31:22 by juloo             #+#    #+#              #
-#    Updated: 2015/06/05 22:13:14 by juloo            ###   ########.fr        #
+#    Updated: 2015/06/10 17:23:26 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,14 +40,14 @@ class JulooInsertCommand(sublime_plugin.TextCommand):
 			file_name = self.view.file_name()
 			if file_name == None:
 				file_name = ""
-			process.stdin.write(bytes(shell_query % {
+			process.stdin.write((shell_query % {
 				"path": path.abspath(path.dirname(file_name)),
 				"file_name": quote(path.basename(file_name)),
 				"line": self.view.rowcol(s.begin())[0] + 1,
 				"column": self.view.rowcol(s.begin())[1] + 1,
 				"text": quote(self.view.substr(text_region)),
 				"cmd": cmd
-			}, 'UTF-8'))
+			}).encode('UTF-8'))
 			self.view.run_command("juloo_write", {
 				"region": {"begin": s.begin(), "end": s.end()},
 				"data": process.communicate()[0].decode('UTF-8').strip('\n')
