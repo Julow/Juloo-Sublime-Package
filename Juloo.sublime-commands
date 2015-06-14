@@ -1,35 +1,5 @@
 [
 	{
-		"caption": "Focus: Next group",
-		"command": "juloo_focus",
-		"args": {
-			"action": "group_next"
-		}
-	},
-	{
-		"caption": "Focus: Previous group",
-		"command": "juloo_focus",
-		"args": {
-			"action": "group_prev"
-		}
-	},
-	{
-		"caption": "Focus: Next view in group",
-		"command": "juloo_focus",
-		"args": {
-			"action": "view_next"
-		}
-	},
-	{
-		"caption": "Focus: Previous view in group",
-		"command": "juloo_focus",
-		"args": {
-			"action": "view_prev"
-		}
-	},
-
-
-	{
 		"caption": "Insert: Line number",
 		"command": "juloo_insert",
 		"args": {
