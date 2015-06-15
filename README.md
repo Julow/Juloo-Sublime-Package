@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Focus](#focus) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -60,6 +60,20 @@ Warning: If there is multiple selections, the command is executed for each curso
 Also add:
 * `Insert Line number` Insert the line number
 * `Insert Column number` Insert the column index
+
+### Focus
+
+Add `8` keys binding:
+- **Switch** next/previous **group**
+- **Switch** next/previous **view** in current group
+- **Move** current **view** to the right/left
+- **Move** current **view** to the next/previous group
+
+> On Linux:
+> - `ctrl+pageup/pagedown` Switch next/prev view in group
+> - `ctrl+shift+pageup/pagedown` Switch next/prev group
+> - `ctrl+alt+pageup/pagedown` Move view to the right/left
+> - `ctrl+alt+shift+pageup/pagedown` Move view to the next/prev group
 
 ### Color Highlight
 
