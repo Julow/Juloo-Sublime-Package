@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Focus](#focus) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Focus](#focus) - [Cursor](#cursor) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -75,6 +75,14 @@ Add `8` keys binding:
 > - `ctrl+alt+pageup/pagedown` Move view to the right/left
 > - `ctrl+alt+shift+pageup/pagedown` Move view to the next/prev group
 
+### Cursor
+
+Allow to save and restore selections
+
+* `ctrl+k`, `ctrl+s` Save current selections
+* `ctrl+k`, `ctrl+r` Restore saved selections
+* `ctrl+k`, `ctrl+backspace` Remove saved selections
+
 ### Color Highlight
 
 Highlight colors in code. _(only when the cursor is over)_
@@ -86,6 +94,13 @@ Contains somes commands to convert colors.
 ![ColorCommands](/images/color_commands.png)
 
 Support many colors syntaxes: rgb/rgba/argb/hsl/hsla functions, CSS hex, int 24 or 32 bits (hexa) and array of float (java/js/C++/python/...).
+
+Color Highlight is disabled by default
+
+```js
+	// Enable Color Highlight
+	"juloo_color_enabled": true
+```
 
 ### Layout Spliter
 
