@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:07 by jaguillo          #+#    #+#              #
-#    Updated: 2015/03/26 13:44:52 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/08/30 18:18:28 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -280,6 +280,8 @@ class JulooColorHighlight(sublime_plugin.EventListener):
 		return resourceCache[1]
 
 	def on_selection_modified_async(self, view):
+		if not view.settings().get("juloo_color_enabled", False):
+			return
 		global lastColorRegions
 		regions = self.get_colored_regions(view)
 		if lastColorRegions != None and len(regions) != len(lastColorRegions):
