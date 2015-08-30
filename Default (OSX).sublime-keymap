@@ -7,5 +7,9 @@
 	{ "keys": ["ctrl+alt+pagedown"], "command": "juloo_focus", "args": {"action": "move_right"}},
 	{ "keys": ["ctrl+alt+pageup"], "command": "juloo_focus", "args": {"action": "move_left"}},
 	{ "keys": ["ctrl+alt+shift+pagedown"], "command": "juloo_focus", "args": {"action": "move_next"}},
-	{ "keys": ["ctrl+alt+shift+pageup"], "command": "juloo_focus", "args": {"action": "move_prev"}}
+	{ "keys": ["ctrl+alt+shift+pageup"], "command": "juloo_focus", "args": {"action": "move_prev"}},
+	// JulooCursor
+	{ "keys": ["super+k", "super+backspace"], "command": "juloo_cursor", "args": {"action": "clear"}},
+	{ "keys": ["super+k", "super+s"], "command": "juloo_cursor", "args": {"action": "save"}},
+	{ "keys": ["super+k", "super+r"], "command": "juloo_cursor", "args": {"action": "restore"}}
 ]
