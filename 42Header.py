@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:03:39 by jaguillo          #+#    #+#              #
-#    Updated: 2015/09/10 11:44:22 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/10/05 13:56:32 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,17 @@ header_config = {
 }
 
 headers = [ # headers for language or file extension
+	([], ["cpp"], """// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   %-50s :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: %-42s +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: %-40s #+#    #+#             //
+//   Updated: %-39s ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //"""),
 	(["C++", "Java", "JavaScript", "ActionScript", "CSS", "JSON", "GLSL"], [], """/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -140,7 +151,6 @@ class Header():
 			r = self.view.sel()[0]
 		self.view.run_command("juloo_write", {
 			"erase": {"begin": r.begin(), "end": r.end()},
-			# "erase": (r.begin(), r.end()),
 			"point": r.begin(),
 			"data": self.pattern[2] % tuple(self.formats) + "\n\n"
 		})
@@ -151,7 +161,6 @@ class Header():
 		end = self.view.line(self.view.text_point(self.offset + height, 0))
 		self.view.run_command("juloo_write", {
 			"region": {"begin": start.begin(), "end": end.end()},
-			# "region": (start.begin(), end.end()),
 			"data": self.pattern[2] % tuple(self.formats)
 		})
 
@@ -174,18 +183,16 @@ class Header():
 
 	def load_pattern(self):
 		syntax = self.view.settings().get("syntax")
+		file_ext = self.view.file_name().lower().split('.')[-1] if self.view.file_name() != None else ""
 		for pattern in headers:
 			for l in pattern[0]:
 				if l in syntax:
 					self.pattern = pattern
 					return True
-		if self.view.file_name() != None:
-			for pattern in headers:
-				ext = self.view.file_name().lower().split('.')
-				for l in pattern[1]:
-					if l == ext[-1]:
-						self.pattern = pattern
-						return True
+			for l in pattern[1]:
+				if l == file_ext:
+					self.pattern = pattern
+					return True
 		if "" in syntax:
 			print("lol")
 		print("No header available for language " + syntax)
