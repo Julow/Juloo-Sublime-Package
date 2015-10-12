@@ -11,5 +11,10 @@
 	// JulooCursor
 	{ "keys": ["ctrl+k", "ctrl+backspace"], "command": "juloo_cursor", "args": {"action": "clear"}},
 	{ "keys": ["ctrl+k", "ctrl+s"], "command": "juloo_cursor", "args": {"action": "save"}},
-	{ "keys": ["ctrl+k", "ctrl+r"], "command": "juloo_cursor", "args": {"action": "restore"}}
+	{ "keys": ["ctrl+k", "ctrl+r"], "command": "juloo_cursor", "args": {"action": "restore"}},
+	// JulooJump
+	{ "keys": ["alt+up"], "command": "juloo_jump", "args": {"action": "up"}},
+	{ "keys": ["alt+down"], "command": "juloo_jump", "args": {"action": "down"}},
+	{ "keys": ["alt+shift+up"], "command": "juloo_jump", "args": {"action": "up", "shift": ""}},
+	{ "keys": ["alt+shift+down"], "command": "juloo_jump", "args": {"action": "down", "shift": ""}}
 ]
