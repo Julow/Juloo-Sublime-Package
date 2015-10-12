@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/12 19:25:59 by jaguillo          #+#    #+#              #
-#    Updated: 2015/10/12 22:53:29 by juloo            ###   ########.fr        #
+#    Updated: 2015/10/12 23:07:00 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ import sublime, sublime_plugin
 # Jump by n lines
 # TODO: Jump to next declaration
 #
-JUMP_BY = 5
+JUMP_BY = 6
 
 class JulooJumpCommand(sublime_plugin.TextCommand):
 
