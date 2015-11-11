@@ -1,20 +1,22 @@
 [
 	// JulooFocus
-	{ "keys": ["ctrl+pagedown"], "command": "juloo_focus", "args": {"action": "view_next"}},
-	{ "keys": ["ctrl+pageup"], "command": "juloo_focus", "args": {"action": "view_prev"}},
-	{ "keys": ["ctrl+shift+pagedown"], "command": "juloo_focus", "args": {"action": "group_next"}},
-	{ "keys": ["ctrl+shift+pageup"], "command": "juloo_focus", "args": {"action": "group_prev"}},
-	{ "keys": ["ctrl+alt+pagedown"], "command": "juloo_focus", "args": {"action": "move_right"}},
-	{ "keys": ["ctrl+alt+pageup"], "command": "juloo_focus", "args": {"action": "move_left"}},
-	{ "keys": ["ctrl+alt+shift+pagedown"], "command": "juloo_focus", "args": {"action": "move_next"}},
-	{ "keys": ["ctrl+alt+shift+pageup"], "command": "juloo_focus", "args": {"action": "move_prev"}},
+	{"keys": ["ctrl+pagedown"], "command": "juloo_focus", "args": {"action": "view_next"}},
+	{"keys": ["ctrl+pageup"], "command": "juloo_focus", "args": {"action": "view_prev"}},
+	{"keys": ["ctrl+shift+pagedown"], "command": "juloo_focus", "args": {"action": "group_next"}},
+	{"keys": ["ctrl+shift+pageup"], "command": "juloo_focus", "args": {"action": "group_prev"}},
+	{"keys": ["ctrl+alt+pagedown"], "command": "juloo_focus", "args": {"action": "move_right"}},
+	{"keys": ["ctrl+alt+pageup"], "command": "juloo_focus", "args": {"action": "move_left"}},
+	{"keys": ["ctrl+alt+shift+pagedown"], "command": "juloo_focus", "args": {"action": "move_next"}},
+	{"keys": ["ctrl+alt+shift+pageup"], "command": "juloo_focus", "args": {"action": "move_prev"}},
 	// JulooCursor
-	{ "keys": ["ctrl+k", "ctrl+backspace"], "command": "juloo_cursor", "args": {"action": "clear"}},
-	{ "keys": ["ctrl+k", "ctrl+s"], "command": "juloo_cursor", "args": {"action": "save"}},
-	{ "keys": ["ctrl+k", "ctrl+r"], "command": "juloo_cursor", "args": {"action": "restore"}},
+	{"keys": ["ctrl+k", "ctrl+backspace"], "command": "juloo_cursor", "args": {"action": "clear"}},
+	{"keys": ["ctrl+k", "ctrl+s"], "command": "juloo_cursor", "args": {"action": "save"}},
+	{"keys": ["ctrl+k", "ctrl+r"], "command": "juloo_cursor", "args": {"action": "restore"}},
+	{"keys": ["ctrl+shift+up"], "command": "juloo_cursor", "args": {"action": "add_up"}},
+	{"keys": ["ctrl+shift+down"], "command": "juloo_cursor", "args": {"action": "add_down"}},
 	// JulooJump
-	{ "keys": ["alt+up"], "command": "juloo_jump", "args": {"action": "up"}},
-	{ "keys": ["alt+down"], "command": "juloo_jump", "args": {"action": "down"}},
-	{ "keys": ["alt+shift+up"], "command": "juloo_jump", "args": {"action": "up", "shift": ""}},
-	{ "keys": ["alt+shift+down"], "command": "juloo_jump", "args": {"action": "down", "shift": ""}}
+	{"keys": ["alt+up"], "command": "juloo_jump", "args": {"action": "up"}},
+	{"keys": ["alt+down"], "command": "juloo_jump", "args": {"action": "down"}},
+	{"keys": ["alt+shift+up"], "command": "juloo_jump", "args": {"action": "up", "shift": ""}},
+	{"keys": ["alt+shift+down"], "command": "juloo_jump", "args": {"action": "down", "shift": ""}}
 ]
