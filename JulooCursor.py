@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/30 16:57:29 by juloo             #+#    #+#              #
-#    Updated: 2015/11/11 23:57:12 by juloo            ###   ########.fr        #
+#    Updated: 2015/11/12 12:19:23 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ def add_cursor(view, by):
 		if pt < 0:
 			continue
 		to_add.append(sublime.Region(pt, pt + s.size()))
-	view.sel().add_all(to_add)
+	for s in to_add:
+		view.sel().add(s)
 # -
 
 def action_save(view):
