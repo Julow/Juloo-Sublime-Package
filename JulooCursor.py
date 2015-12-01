@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/30 16:57:29 by juloo             #+#    #+#              #
-#    Updated: 2015/11/12 12:19:23 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/12/01 14:15:46 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ import sublime, sublime_plugin
 #
 # Multi cursor:
 #
-# ctrl+shift+down			Add a cursor 1 row below
-# ctrl+shift+up				Add a cursor 1 row above
+# ctrl+shift+down			Add a cursor 1 row below (disabled)
+# ctrl+shift+up				Add a cursor 1 row above (disabled)
 #
 
 savedSelections = []
@@ -41,9 +41,9 @@ def tabs_text_point(view, row, col):
 	return view.text_point(row, col - (expanded - col))
 
 def next_line_fit(view, row, col, by, sel_size):
-	if sel_size == 0:
-		line_len = len(view.substr(view.line(view.text_point(row, 0))).expandtabs(TAB_SIZE))
-		return tabs_text_point(view, row, col)
+	# if sel_size == 0:
+	# 	line_len = len(view.substr(view.line(view.text_point(row, 0))).expandtabs(TAB_SIZE))
+	# 	return tabs_text_point(view, row, col)
 	min_len = col + sel_size
 	max_row, _ = view.rowcol(view.size())
 	while row >= 0 and row <= max_row:
