@@ -1,0 +1,7 @@
+<snippet>
+	<name>std::cout</name>
+	<content><![CDATA[std::cout << $0 << std::endl;]]></content>
+	<tabTrigger>std::cout</tabTrigger>
+	<tabTrigger>cout</tabTrigger>
+	<scope>source.c++</scope>
+</snippet>
