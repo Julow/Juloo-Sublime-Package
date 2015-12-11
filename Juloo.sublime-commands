@@ -1,5 +1,12 @@
 [
 	{
+		"caption": "Sort Includes",
+		"command": "juloo_sort_include"
+	},
+
+
+
+	{
 		"caption": "Insert: Line number",
 		"command": "juloo_insert",
 		"args": {

@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Focus](#focus) - [Cursor](#cursor) - [Jump](#jump) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Focus](#focus) - [Cursor](#cursor) - [Jump](#jump) - [Include Sort](#include-sort) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -88,6 +88,18 @@ Allow to save and restore selections
 * `alt+up` Jump 6 lines up
 * `alt+down` Jump 6 lines down
 * `alt+shift+up` or `alt+shift+down` Same but selecting
+
+### Include Sort
+
+Sort C/C++ includes on save.
+
+Can be disabled:
+```js
+	// Disable automatic include sorting
+	"juloo_sort_include": false
+```
+
+Add `Sort Includes` command.
 
 ### Color Highlight
 
