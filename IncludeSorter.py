@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/11 14:06:40 by jaguillo          #+#    #+#              #
-#    Updated: 2015/12/11 15:23:12 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/12/12 16:25:31 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,15 @@ def c_include_sort(includes):
 		else:
 			dst = angle if i[2] else simple
 		dst[i[1]] = i
-	def sort(d, trail = True):
-		return [d[i][0] for i in sorted(d)] + ([""] if len(d) > 0 and trail else [])
-	return sort(simple_prefixed) + sort(simple) + sort(angle, False) + sort(angle_prefixed)
+	def sort(a):
+		return [a[i][0] for i in sorted(a)]
+	def helper(a, b):
+		if len(b) == 0:
+			return a
+		elif len(a) == 0:
+			return b
+		return a + [""] + b if len(a) > 1 or len(b) > 1 else a + b
+	return helper(helper(sort(simple_prefixed), sort(simple)), helper(sort(angle), sort(angle_prefixed))) + [""]
 
 LANGS = [
 	(["C++"], [], is_c_include, c_include_sort)
