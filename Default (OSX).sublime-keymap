@@ -18,5 +18,9 @@
 	{"keys": ["alt+up"], "command": "juloo_jump", "args": {"action": "up"}},
 	{"keys": ["alt+down"], "command": "juloo_jump", "args": {"action": "down"}},
 	{"keys": ["alt+shift+up"], "command": "juloo_jump", "args": {"action": "up", "shift": ""}},
-	{"keys": ["alt+shift+down"], "command": "juloo_jump", "args": {"action": "down", "shift": ""}}
+	{"keys": ["alt+shift+down"], "command": "juloo_jump", "args": {"action": "down", "shift": ""}},
+	// LayoutSpliter
+	{"keys": ["super+k", "super+d"], "command": "juloo_layout_spliter", "args": {"action": "split", "direction": "vertical"}},
+	{"keys": ["super+k", "super+shift+d"], "command": "juloo_layout_spliter", "args": {"action": "split", "direction": "horizontal"}},
+	{"keys": ["super+k", "super+m"], "command": "juloo_layout_spliter", "args": {"action": "merge"}}
 ]
