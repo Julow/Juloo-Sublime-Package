@@ -17,6 +17,10 @@
 	// JulooJump
 	{"keys": ["alt+up"], "command": "juloo_jump", "args": {"action": "up"}},
 	{"keys": ["alt+down"], "command": "juloo_jump", "args": {"action": "down"}},
-	{"keys": ["alt+shift+up"], "command": "juloo_jump", "args": {"action": "up", "shift": ""}},
-	{"keys": ["alt+shift+down"], "command": "juloo_jump", "args": {"action": "down", "shift": ""}}
+	{"keys": ["alt+shift+up"], "command": "juloo_jump", "args": {"action": "up", "shift": true}},
+	{"keys": ["alt+shift+down"], "command": "juloo_jump", "args": {"action": "down", "shift": true}},
+	{"keys": ["alt+super+right"], "command": "juloo_jump", "args": {"action": "right"}},
+	{"keys": ["alt+super+left"], "command": "juloo_jump", "args": {"action": "left"}},
+	{"keys": ["alt+super+shift+right"], "command": "juloo_jump", "args": {"action": "right", "shift": true}},
+	{"keys": ["alt+super+shift+left"], "command": "juloo_jump", "args": {"action": "left", "shift": true}}
 ]
