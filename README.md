@@ -126,11 +126,15 @@ Change easily the Sublime Text layout
 
 ![LayoutSpliter](/images/layout_spliter.gif)
 
-Split vertically or horizontally the layout with commands.
+Shortcuts:
 
-![LayoutCommands](/images/layout_commands.png)
+* `ctrl+k, ctrl+d` Split vertical
+* `ctrl+k, ctrl+shift+d` Split horizontal
+* `ctrl+k, ctrl+m` Merge
 
 Commands:
+
+![LayoutCommands](/images/layout_commands.png)
 
 * `Split vertical` (Split the current view vertically into 2 equal parts)
 * `Split horizontal` (Split the current view horizontally into 2 equal parts)
