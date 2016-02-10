@@ -51,7 +51,7 @@
 
 
 	{
-		"caption": "[42] Insert the 42 Header",
+		"caption": "[ 42 ] Insert the 42 Header",
 		"command": "juloo_header",
 		"args":
 		{
