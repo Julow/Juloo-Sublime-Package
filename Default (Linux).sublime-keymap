@@ -1,5 +1,5 @@
 [
-	// JulooFocus
+	// focus
 	{"keys": ["ctrl+pagedown"], "command": "juloo_focus", "args": {"action": "view_next"}},
 	{"keys": ["ctrl+pageup"], "command": "juloo_focus", "args": {"action": "view_prev"}},
 	{"keys": ["ctrl+shift+pagedown"], "command": "juloo_focus", "args": {"action": "group_next"}},
@@ -8,13 +8,15 @@
 	{"keys": ["ctrl+alt+pageup"], "command": "juloo_focus", "args": {"action": "move_left"}},
 	{"keys": ["ctrl+alt+shift+pagedown"], "command": "juloo_focus", "args": {"action": "move_next"}},
 	{"keys": ["ctrl+alt+shift+pageup"], "command": "juloo_focus", "args": {"action": "move_prev"}},
-	// JulooCursor
+
+	// cursor
 	{"keys": ["ctrl+k", "ctrl+backspace"], "command": "juloo_cursor", "args": {"action": "clear"}},
 	{"keys": ["ctrl+k", "ctrl+s"], "command": "juloo_cursor", "args": {"action": "save"}},
 	{"keys": ["ctrl+k", "ctrl+r"], "command": "juloo_cursor", "args": {"action": "restore"}},
 	{"keys": ["ctrl+shift+up"], "command": "juloo_cursor", "args": {"action": "add_up"}},
 	{"keys": ["ctrl+shift+down"], "command": "juloo_cursor", "args": {"action": "add_down"}},
-	// JulooJump
+
+	// jump
 	{"keys": ["alt+up"], "command": "juloo_jump", "args": {"action": "up"}},
 	{"keys": ["alt+down"], "command": "juloo_jump", "args": {"action": "down"}},
 	{"keys": ["alt+shift+up"], "command": "juloo_jump", "args": {"action": "up", "shift": true}},
@@ -23,8 +25,12 @@
 	{"keys": ["alt+super+left"], "command": "juloo_jump", "args": {"action": "left"}},
 	{"keys": ["alt+super+shift+right"], "command": "juloo_jump", "args": {"action": "right", "shift": true}},
 	{"keys": ["alt+super+shift+left"], "command": "juloo_jump", "args": {"action": "left", "shift": true}},
-	// LayoutSpliter
+
+	// layout spliter
 	{"keys": ["ctrl+k", "ctrl+d"], "command": "juloo_layout_spliter", "args": {"action": "split", "direction": "vertical"}},
 	{"keys": ["ctrl+k", "ctrl+shift+d"], "command": "juloo_layout_spliter", "args": {"action": "split", "direction": "horizontal"}},
-	{"keys": ["ctrl+k", "ctrl+m"], "command": "juloo_layout_spliter", "args": {"action": "merge"}}
+	{"keys": ["ctrl+k", "ctrl+m"], "command": "juloo_layout_spliter", "args": {"action": "merge"}},
+
+	// side bar
+	{"keys": ["ctrl+,"], "command": "juloo_side_bar"}
 ]
