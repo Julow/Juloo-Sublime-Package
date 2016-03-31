@@ -225,10 +225,3 @@ Add this line into your configuration file to enable it:
 ```
 
 The _scope_ is used to build color schemes.
-
-## Old plugins
-
-* [JulooColorHightlight](https://github.com/Julow/JulooColorHighlight)
-* [JulooSnippets](https://github.com/Julow/Juloo-Snippets)
-* [JulooColorSchemes](https://github.com/Julow/Juloo-Color-Schemes)
-* [LayoutSpliter](https://github.com/Julow/LayoutSpliter)
