@@ -2,7 +2,7 @@
 
 All my sublime plugins.
 
-\- [42 Header](#42-header) - [Shell Insert](#shell-insert) - [Focus](#focus) - [Cursor](#cursor) - [Jump](#jump) - [Side bar](#side-bar) - [Include Sort](#include-sort) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
+\- [42 Header](#42-header) - [Run Command](#run-command) - [Shell Insert](#shell-insert) - [Focus](#focus) - [Cursor](#cursor) - [Jump](#jump) - [Side bar](#side-bar) - [Include Sort](#include-sort) - [Color Highlight](#color-highlight) - [C++](#cpp) - [Layout Spliter](#layout-spliter) - [Snippets](#snippets) - [Color Schemes](#color-schemes) - [ASM syntax](#asm-syntax) - [Status bar](#status-bar) - [Misc](#misc) -
 
 ## Installation
 
@@ -38,6 +38,14 @@ Add this line into your `Settings - User`:
 ```js
 	"pseudo": "your name"
 ```
+
+### Run Command
+
+`ctrl+b` show a prompt that execute a command
+
+Before the command is run, the pwd is set to the first opened folder
+
+Save the last used command
 
 ### Shell Insert
 

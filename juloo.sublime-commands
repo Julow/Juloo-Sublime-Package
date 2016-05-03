@@ -1,5 +1,12 @@
 [
 	{
+		"caption": "Run command",
+		"command": "juloo_run_command"
+	},
+
+
+
+	{
 		"caption": "Sort Includes",
 		"command": "juloo_sort_include"
 	},

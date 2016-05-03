@@ -32,5 +32,8 @@
 	{"keys": ["super+k", "super+m"], "command": "juloo_layout_spliter", "args": {"action": "merge"}},
 
 	// side bar
-	{"keys": ["super+,"], "command": "juloo_side_bar"}
+	{"keys": ["super+,"], "command": "juloo_side_bar"},
+
+	// run command
+	{"keys": ["super+b"], "command": "juloo_run_command"}
 ]
