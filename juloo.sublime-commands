@@ -3,6 +3,10 @@
 		"caption": "Run command",
 		"command": "juloo_run_command"
 	},
+	{
+		"caption": "Run command: kill running commands",
+		"command": "juloo_kill_command"
+	},
 
 
 
