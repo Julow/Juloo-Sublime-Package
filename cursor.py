@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/30 16:57:29 by juloo             #+#    #+#              #
-#    Updated: 2016/05/13 18:13:53 by jaguillo         ###   ########.fr        #
+#    Updated: 2016/05/13 18:36:57 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,19 @@ import sublime, sublime_plugin
 # ctrl+shift+down			Add a cursor 1 row below
 # ctrl+shift+up				Add a cursor 1 row above
 #
+# Cursor move:
+#
+# alt+up					Move to previous paragraph
+# alt+down					Move to next paragraph
+#
 
 ACTIONS = {
-	"save": lambda s: s.save_cursors(),
-	"restore": lambda s: s.restore_cursors(),
-	"clear": lambda s: s.clear_cursors(),
-	"add_up": lambda s: s.add_cursor_column(False),
-	"add_down": lambda s: s.add_cursor_column(True)
+	"save": lambda s, _: s.save_cursors(),
+	"restore": lambda s, _: s.restore_cursors(),
+	"clear": lambda s, _: s.clear_cursors(),
+	"add_up": lambda s, _: s.add_cursor_column(False),
+	"add_down": lambda s, _: s.add_cursor_column(True),
+	"move_p": lambda s, args: s.move_by_paragraph(-1 if "up" in args else 1, "shift" in args),
 }
 
 SAVED_REGIONS_KEY = "juloo_saved_cursors"
@@ -46,7 +52,7 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit, **args):
 		if "action" in args and args["action"] in ACTIONS:
-			ACTIONS[args["action"]](self)
+			ACTIONS[args["action"]](self, args)
 
 	# Save current cursors
 	def save_cursors(self):
@@ -61,6 +67,28 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 	def restore_cursors(self):
 		self.view.sel().add_all(self.view.get_regions(SAVED_REGIONS_KEY))
 		self.clear_cursors()
+
+	# Move cursors by paragraph
+	def move_by_paragraph(self, d, shift):
+		sels = []
+		def empty_line(row):
+			while True:
+				row += d
+				pt = self.view.text_point(row, 0)
+				line_str = self.view.substr(self.view.line(pt))
+				if len(line_str.strip()) == 0:
+					return pt + len(line_str)
+				if row < 0 or pt >= self.view.size():
+					return -1
+		for s in self.view.sel():
+			row, _ = self.view.rowcol(s.b)
+			pt = empty_line(row)
+			if pt < 0:
+				break
+			sels.append(sublime.Region(s.a if shift else pt, pt))
+		self.view.sel().clear()
+		self.view.sel().add_all(sels)
+		self.view.show(sels[0] if d < 0 else sels[-1])
 
 	# Add a cursor by column
 	def add_cursor_column(self, down):

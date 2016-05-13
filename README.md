@@ -85,16 +85,12 @@ Add `8` keys binding:
 
 ### Cursor
 
-Allow to save and restore selections
-
 * `ctrl+k`, `ctrl+s` Save current selections
 * `ctrl+k`, `ctrl+r` Restore saved selections
 * `ctrl+k`, `ctrl+backspace` Remove saved selections
 
-### Jump
-
-* `alt+up` Jump 6 lines up
-* `alt+down` Jump 6 lines down
+* `alt+up` Jump before previous paragraph
+* `alt+down` Jump after next paragraph
 * `alt+shift+up` or `alt+shift+down` Same but selecting
 
 ### Side Bar
