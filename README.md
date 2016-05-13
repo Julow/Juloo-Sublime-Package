@@ -85,9 +85,12 @@ Add `8` keys binding:
 
 ### Cursor
 
-* `ctrl+k`, `ctrl+s` Save current selections
-* `ctrl+k`, `ctrl+r` Restore saved selections
-* `ctrl+k`, `ctrl+backspace` Remove saved selections
+* `alt+s` Save current cursors
+* `alt+shift+s` Restore saved cursors
+* `alt+x` Remove saved cursors
+
+* `alt+d` Jump to the next saved cursor
+* `alt+shift+d` Jump to the previous saved cursor
 
 * `alt+up` Jump before previous paragraph
 * `alt+down` Jump after next paragraph

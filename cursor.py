@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/30 16:57:29 by juloo             #+#    #+#              #
-#    Updated: 2016/05/13 18:36:57 by jaguillo         ###   ########.fr        #
+#    Updated: 2016/05/14 00:32:09 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,12 @@ import sublime, sublime_plugin
 #
 # Selection save:
 #
-# ctrl+k, ctrl+backspace	clear saved selections
-# ctrl+k, ctrl+s			save current selections
-# ctrl+k, ctrl+r			restore saved selections
+# alt+x						Clear saved cursors
+# alt+s						Save current cursors
+# alt+shift+s				Restore saved cursors
+#
+# alt+d						Jump to the next saved cursor
+# alt+shift+d				Jump to the previous saved cursor
 #
 # Multi cursor:
 #
@@ -34,6 +37,8 @@ ACTIONS = {
 	"save": lambda s, _: s.save_cursors(),
 	"restore": lambda s, _: s.restore_cursors(),
 	"clear": lambda s, _: s.clear_cursors(),
+	"next": lambda s, _: s.next_cursor(1),
+	"prev": lambda s, _: s.next_cursor(-1),
 	"add_up": lambda s, _: s.add_cursor_column(False),
 	"add_down": lambda s, _: s.add_cursor_column(True),
 	"move_p": lambda s, args: s.move_by_paragraph(-1 if "up" in args else 1, "shift" in args),
@@ -66,7 +71,26 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 	# Restore saved cursors
 	def restore_cursors(self):
 		self.view.sel().add_all(self.view.get_regions(SAVED_REGIONS_KEY))
-		self.clear_cursors()
+
+	# Jump to the next cursor
+	def next_cursor(self, d):
+		sels = []
+		cursors = self.view.get_regions(SAVED_REGIONS_KEY)
+		def norm(i):
+			if i < 0:
+				return -1
+			elif i == 0:
+				return 0
+			return 1
+		for s in self.view.sel():
+			nexts = [c for c in cursors if norm(c.begin() - s.begin()) == d]
+			if len(nexts) == 0:
+				sels.append(cursors[0 if d > 0 else -1])
+			else:
+				sels.append(min(nexts, key=lambda c: abs(c.begin() - s.begin())))
+		self.view.sel().clear()
+		self.view.sel().add_all(sels)
+		self.view.show(sels[0] if d < 0 else sels[-1])
 
 	# Move cursors by paragraph
 	def move_by_paragraph(self, d, shift):
@@ -75,11 +99,11 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 			while True:
 				row += d
 				pt = self.view.text_point(row, 0)
+				if pt == 0 or pt >= self.view.size():
+					return pt
 				line_str = self.view.substr(self.view.line(pt))
 				if len(line_str.strip()) == 0:
 					return pt + len(line_str)
-				if row < 0 or pt >= self.view.size():
-					return -1
 		for s in self.view.sel():
 			row, _ = self.view.rowcol(s.b)
 			pt = empty_line(row)
