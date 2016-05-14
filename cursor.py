@@ -6,11 +6,11 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/30 16:57:29 by juloo             #+#    #+#              #
-#    Updated: 2016/05/14 00:32:09 by juloo            ###   ########.fr        #
+#    Updated: 2016/05/14 21:49:02 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-import sublime, sublime_plugin
+import sublime, sublime_plugin, itertools
 
 #
 # Selection save:
@@ -18,25 +18,21 @@ import sublime, sublime_plugin
 # alt+x						Clear saved cursors
 # alt+s						Save current cursors
 # alt+shift+s				Restore saved cursors
+# alt{,+shift}+r			Rotate sets of saved cursors
 #
-# alt+d						Jump to the next saved cursor
-# alt+shift+d				Jump to the previous saved cursor
+# alt{,+shift}+d			Jump to the {next,previous} saved cursor
 #
-# Multi cursor:
+# ctrl+shift+{up,down}		Add a cursor 1 row {above,below}
 #
-# ctrl+shift+down			Add a cursor 1 row below
-# ctrl+shift+up				Add a cursor 1 row above
-#
-# Cursor move:
-#
-# alt+up					Move to previous paragraph
-# alt+down					Move to next paragraph
+# alt+{up,down}				Move to the {previous,next} paragraph
 #
 
 ACTIONS = {
 	"save": lambda s, _: s.save_cursors(),
 	"restore": lambda s, _: s.restore_cursors(),
 	"clear": lambda s, _: s.clear_cursors(),
+	"rot": lambda s, _: s.rotate_cursors(-1),
+	"rrot": lambda s, _: s.rotate_cursors(1),
 	"next": lambda s, _: s.next_cursor(1),
 	"prev": lambda s, _: s.next_cursor(-1),
 	"add_up": lambda s, _: s.add_cursor_column(False),
@@ -44,8 +40,8 @@ ACTIONS = {
 	"move_p": lambda s, args: s.move_by_paragraph(-1 if "up" in args else 1, "shift" in args),
 }
 
-SAVED_REGIONS_KEY = "juloo_saved_cursors"
-SAVED_REGIONS_SCOPE = "comment"
+SAVED_REGIONS_KEY = "juloo_saved_cursors.%d"
+SAVED_REGIONS_SCOPE = ["comment", "selection"]
 SAVED_REGIONS_FLAGS = sublime.DRAW_EMPTY | sublime.DRAW_NO_FILL | sublime.PERSISTENT
 
 TAB_SIZE = 4
@@ -61,29 +57,26 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 
 	# Save current cursors
 	def save_cursors(self):
-		r = self.view.get_regions(SAVED_REGIONS_KEY) + list(self.view.sel())
-		self.view.add_regions(SAVED_REGIONS_KEY, r, SAVED_REGIONS_SCOPE, flags=SAVED_REGIONS_FLAGS)
+		self._put_regions(0, self._get_regions(0) + list(self.view.sel()))
 
 	# Clear saved cursors
 	def clear_cursors(self):
-		self.view.add_regions(SAVED_REGIONS_KEY, [])
+		for i, c in list(enumerate(list(self._get_all_regions()) + [[]]))[1:]:
+			self._put_regions(i - 1, c)
 
 	# Restore saved cursors
 	def restore_cursors(self):
-		self.view.sel().add_all(self.view.get_regions(SAVED_REGIONS_KEY))
+		self.view.sel().add_all(self._get_regions(0))
 
 	# Jump to the next cursor
 	def next_cursor(self, d):
 		sels = []
-		cursors = self.view.get_regions(SAVED_REGIONS_KEY)
-		def norm(i):
-			if i < 0:
-				return -1
-			elif i == 0:
-				return 0
-			return 1
+		cursors = self._get_regions(0)
+		if len(cursors) == 0:
+			return
+		def n(d): return -1 if d < 0 else 1 if d > 0 else 0
 		for s in self.view.sel():
-			nexts = [c for c in cursors if norm(c.begin() - s.begin()) == d]
+			nexts = [c for c in cursors if n(c.begin() - s.begin()) == d]
 			if len(nexts) == 0:
 				sels.append(cursors[0 if d > 0 else -1])
 			else:
@@ -91,6 +84,30 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 		self.view.sel().clear()
 		self.view.sel().add_all(sels)
 		self.view.show(sels[0] if d < 0 else sels[-1])
+
+	# Rotate saved cursors
+	def rotate_cursors(self, d):
+		cursors = list(self._get_all_regions())
+		for i, c in enumerate(cursors[d:] + cursors[:d]):
+			self._put_regions(i, c)
+
+	#
+	def _get_all_regions(self):
+		i = 0
+		has_empty = False
+		while True:
+			tmp = self._get_regions(i)
+			if len(tmp) == 0:
+				if has_empty:
+					break
+				has_empty = True
+			yield tmp
+			i += 1
+	def _get_regions(self, i):
+		return self.view.get_regions(SAVED_REGIONS_KEY % i)
+	def _put_regions(self, i, regions):
+		scope = SAVED_REGIONS_SCOPE[min(i, len(SAVED_REGIONS_SCOPE) - 1)]
+		self.view.add_regions(SAVED_REGIONS_KEY % i, regions, scope, flags=SAVED_REGIONS_FLAGS)
 
 	# Move cursors by paragraph
 	def move_by_paragraph(self, d, shift):
