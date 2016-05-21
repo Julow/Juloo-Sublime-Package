@@ -1,6 +1,0 @@
-<snippet>
-	<description>Typedef</description>
-	<content><![CDATA[typedef ${1:type}	t_$2;]]></content>
-	<tabTrigger>t_</tabTrigger>
-	<scope>source.c, source.c++</scope>
-</snippet>

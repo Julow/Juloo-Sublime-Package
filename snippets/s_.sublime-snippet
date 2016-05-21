@@ -1,9 +1,0 @@
-<snippet>
-	<name>Struct</name>
-	<content><![CDATA[typedef struct	s_${1/(.*)/$1/}
-{
-	$0
-}				t_${1};]]></content>
-	<tabTrigger>s_</tabTrigger>
-	<scope>source.c, source.c++</scope>
-</snippet>

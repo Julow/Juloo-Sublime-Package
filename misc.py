@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Misc.py                                            :+:      :+:    :+:    #
+#    misc.py                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2015/05/29 00:18:13 by juloo            ###   ########.fr        #
+#    Updated: 2016/05/21 12:50:37 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,17 +36,6 @@ class JulooWriteCommand(sublime_plugin.TextCommand):
 		else:
 			for s in self.view.sel():
 				self.view.replace(edit, s, args["data"])
-
-#
-# Show the current scope in the status bar
-#
-class JulooScopeHelper(sublime_plugin.EventListener):
-
-	def on_selection_modified(self, view):
-		if view.settings().get("juloo_show_scope", False) and len(view.sel()) == 1 and view.sel()[0].size() == 0:
-			view.set_status("scope_juloo", "[ "+ view.scope_name(view.sel()[0].a) +"]")
-		else:
-			view.erase_status("scope_juloo");
 
 #
 # Show the font size for 3 secs when you change it using CTRL+mouse

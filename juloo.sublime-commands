@@ -1,4 +1,5 @@
 [
+
 	{
 		"caption": "Run command",
 		"command": "juloo_run_command"
@@ -8,42 +9,25 @@
 		"command": "juloo_kill_command"
 	},
 
-
-
 	{
 		"caption": "Sort Includes",
 		"command": "juloo_sort_include"
 	},
 
-
-
 	{
 		"caption": "Insert: Line number",
 		"command": "juloo_insert",
-		"args": {
-			"what": "line_num"
-		}
+		"args": { "what": "line_num" }
 	},
 	{
 		"caption": "Insert: Column number",
 		"command": "juloo_insert",
-		"args": {
-			"what": "column"
-		}
+		"args": { "what": "column" }
 	},
 	{
 		"caption": "Insert: Shell command output",
 		"command": "juloo_insert",
-		"args": {
-			"what": "shell"
-		}
-	},
-
-
-
-	{
-		"caption": "Test test test test test",
-		"command": "juloo_test"
+		"args": { "what": "shell" }
 	},
 
 	{
@@ -58,8 +42,6 @@
 		"caption": "[.cpp] Create C++ class",
 		"command": "juloo_cpp"
 	},
-
-
 
 	{
 		"caption": "[ 42 ] Insert the 42 Header",
@@ -78,85 +60,31 @@
 		}
 	},
 
-
-
-
 	{
 		"caption": "Open this file in browser",
 		"command": "juloo_open_browser"
 	},
 
-
-
-	{
-		"caption": "Color: Convert to int [0xAARRGGBB]",
-		"command": "juloo_color_convert",
-		"args":
-		{
-			"to": "int"
-		}
-	},
-	{
-		"caption": "Color: Convert to hex [#RRGGBBAA]",
-		"command": "juloo_color_convert",
-		"args":
-		{
-			"to": "hex"
-		}
-	},
-	{
-		"caption": "Color: Convert to rgb [rgba(R, G, B, A)]",
-		"command": "juloo_color_convert",
-		"args":
-		{
-			"to": "rgb"
-		}
-	},
-	{
-		"caption": "Color: Convert to hsl [hsla(H, S, L, A)]",
-		"command": "juloo_color_convert",
-		"args":
-		{
-			"to": "hsl"
-		}
-	},
-
-
-
 	{
 		"caption": "LayoutSpliter: Split Horizontal",
 		"command": "juloo_layout_spliter",
-		"args":
-		{
-			"action": "split",
-			"direction": "horizontal"
-		}
+		"args": { "action": "split", "direction": "horizontal" }
 	},
 	{
 		"caption": "LayoutSpliter: Split Vertical",
 		"command": "juloo_layout_spliter",
-		"args":
-		{
-			"action": "split",
-			"direction": "vertical"
-		}
+		"args": { "action": "split", "direction": "vertical" }
 	},
+
 	{
 		"caption": "LayoutSpliter: Merge",
 		"command": "juloo_layout_spliter",
-		"args":
-		{
-			"action": "merge",
-			"direction": ""
-		}
+		"args": { "action": "merge", "direction": "" }
 	},
 	{
 		"caption": "LayoutSpliter: Reset",
 		"command": "juloo_layout_spliter",
-		"args":
-		{
-			"action": "reset",
-			"direction": ""
-		}
+		"args": { "action": "reset", "direction": "" }
 	}
+
 ]

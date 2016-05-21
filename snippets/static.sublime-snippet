@@ -1,6 +1,0 @@
-<snippet>
-	<name>Static</name>
-	<content><![CDATA[static ${1:void}		${2:name}${3:()}]]></content>
-	<tabTrigger>static</tabTrigger>
-	<scope>source.c, source.c++</scope>
-</snippet>
