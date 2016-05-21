@@ -76,6 +76,7 @@ Note: If there is multiple selections, the command is executed for each cursors
 ### Side Bar
 
 * `ctrl+,` Toggle and focus side bar + Reveal current file
+* `ctrl+b, ctrl+,` Clear side bar
 
 ### Include Sort
 

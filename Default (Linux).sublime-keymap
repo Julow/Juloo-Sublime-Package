@@ -33,7 +33,8 @@
 	{"keys": ["ctrl+k", "ctrl+m"], "command": "juloo_layout_spliter", "args": {"action": "merge"}},
 
 	// side bar
-	{"keys": ["ctrl+,"], "command": "juloo_side_bar"},
+	{"keys": ["ctrl+,"], "command": "juloo_side_bar", "args": {"action": "toggle"}},
+	{"keys": ["ctrl+k", "ctrl+,"], "command": "juloo_side_bar", "args": {"action": "clear"}},
 
 	// run command
 	{"keys": ["ctrl+b"], "command": "juloo_run_command"}
