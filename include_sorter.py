@@ -1,16 +1,21 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    IncludeSorter.py                                   :+:      :+:    :+:    #
+#    include_sorter.py                                  :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/11 14:06:40 by jaguillo          #+#    #+#              #
-#    Updated: 2015/12/12 16:25:31 by juloo            ###   ########.fr        #
+#    Updated: 2016/06/20 18:35:53 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import sublime_plugin, sublime, re
+
+#
+# ============================================================================ #
+# C/C++
+#
 
 REG_C_INCLUDE = re.compile('\s*#\s*include\s*(?:<([^>]+)>|"([^"]+)").*')
 
@@ -40,8 +45,32 @@ def c_include_sort(includes):
 		return a + [""] + b if len(a) > 1 or len(b) > 1 else a + b
 	return helper(helper(sort(simple_prefixed), sort(simple)), helper(sort(angle), sort(angle_prefixed))) + [""]
 
+#
+# ============================================================================ #
+# module
+#
+
+REG_MODULE_REQUIRE = re.compile('\s*(?:(public|private)\s+|)require\s+([^\s]+).*')
+
+def is_module_require(line):
+	m = REG_MODULE_REQUIRE.match(line)
+	return (m.group(0), m.group(1) == "public", m.group(2)) if m != None else None
+
+def module_require_sort(lines):
+	def sort(lines):
+		return [l[0] for l in sorted(lines, key=lambda l: (not l[1], "::" not in l[2], l[2]))]
+	public, private = [], []
+	for l in lines:
+		(public if l[1] else private).append(l)
+	return sort(public) + [""] + sort(private)
+
+#
+# ============================================================================ #
+#
+
 LANGS = [
-	(["C++"], [], is_c_include, c_include_sort)
+	(["C++"], [], is_c_include, c_include_sort),
+	([], ["module"], is_module_require, module_require_sort)
 ]
 
 def get_lang(file_name, syntax):
@@ -64,7 +93,7 @@ def sort_includes(view, edit):
 			r = sublime.Region(view.text_point(includes[1], 0),
 				view.text_point(row, 0) - 1)
 			view.replace(edit, r, "\n".join(lines))
-	for row in range(max_row):
+	for row in range(max_row + 1):
 		line = view.substr(view.line(view.text_point(row, 0)))
 		if len(line.strip()) == 0:
 			continue
