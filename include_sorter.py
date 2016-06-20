@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/11 14:06:40 by jaguillo          #+#    #+#              #
-#    Updated: 2016/06/20 18:35:53 by jaguillo         ###   ########.fr        #
+#    Updated: 2016/06/20 18:51:17 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ def c_include_sort(includes):
 		elif len(a) == 0:
 			return b
 		return a + [""] + b if len(a) > 1 or len(b) > 1 else a + b
-	return helper(helper(sort(simple_prefixed), sort(simple)), helper(sort(angle), sort(angle_prefixed))) + [""]
+	return helper(helper(sort(simple_prefixed), sort(simple)), helper(sort(angle), sort(angle_prefixed)))
 
 #
 # ============================================================================ #
@@ -62,7 +62,9 @@ def module_require_sort(lines):
 	public, private = [], []
 	for l in lines:
 		(public if l[1] else private).append(l)
-	return sort(public) + [""] + sort(private)
+	public, private = sort(public), sort(private)
+	split = [""] if len(public) > 0 and len(private) > 0 else []
+	return public + split + private
 
 #
 # ============================================================================ #
@@ -87,12 +89,12 @@ def sort_includes(view, edit):
 	is_include, include_sort = get_lang(view.file_name(), view.settings().get("syntax"))
 	max_row, _ = view.rowcol(view.size())
 	includes = None
-	def helper(includes):
+	def helper(includes, eof=False):
 		if includes != None:
 			lines = include_sort(includes[0])
 			r = sublime.Region(view.text_point(includes[1], 0),
 				view.text_point(row, 0) - 1)
-			view.replace(edit, r, "\n".join(lines))
+			view.replace(edit, r, "\n".join(lines) + ("\n" if not eof else ""))
 	for row in range(max_row + 1):
 		line = view.substr(view.line(view.text_point(row, 0)))
 		if len(line.strip()) == 0:
@@ -106,7 +108,7 @@ def sort_includes(view, edit):
 				includes = ([], row)
 			print ("INCLUDE %s" % line)
 			includes[0].append(inc)
-	helper(includes)
+	helper(includes, True)
 
 class JulooIncludeSorter(sublime_plugin.EventListener):
 
