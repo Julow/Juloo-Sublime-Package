@@ -37,5 +37,8 @@
 	{"keys": ["super+k", "super+,"], "command": "juloo_side_bar", "args": {"action": "clear"}},
 
 	// run command
-	{"keys": ["super+b"], "command": "juloo_run_command"}
+	{"keys": ["super+b"], "command": "juloo_run_command"},
+
+	// Misc
+	{ "keys": ["super+k", "super+t"], "command": "toggle_tabs" }
 ]

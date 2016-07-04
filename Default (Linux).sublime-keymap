@@ -37,5 +37,8 @@
 	{"keys": ["ctrl+k", "ctrl+,"], "command": "juloo_side_bar", "args": {"action": "clear"}},
 
 	// run command
-	{"keys": ["ctrl+b"], "command": "juloo_run_command"}
+	{"keys": ["ctrl+b"], "command": "juloo_run_command"},
+
+	// Misc
+	{ "keys": ["ctrl+k", "ctrl+t"], "command": "toggle_tabs" }
 ]
