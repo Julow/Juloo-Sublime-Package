@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/14 20:47:40 by juloo             #+#    #+#              #
-#    Updated: 2016/05/28 16:28:53 by juloo            ###   ########.fr        #
+#    Updated: 2016/07/05 20:07:54 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,14 @@ class JulooFocusCommand(sublime_plugin.WindowCommand):
 		self.focus_message()
 
 	def focus_message(self):
-		v = self.window.active_view()
-		sublime.status_message("[%s]" % (v.name() or os.path.basename(v.file_name())))
+		def file_name():
+			fname = self.window.active_view().file_name()
+			for f in self.window.project_data()["folders"]:
+				f = f["path"]
+				if fname.startswith(f):
+					return "*%s* %s" % (os.path.basename(f), os.path.relpath(fname, f))
+			return "* %s" % os.path.basename(fname)
+		sublime.status_message("[%s]" % file_name())
 
 	def move_view(self, offset = 1):
 		view = self.window.active_view()
