@@ -27,6 +27,9 @@
 	{"keys": ["alt+shift+up"], "command": "juloo_cursor", "args": {"action": "move_p", "up": true, "shift": true}},
 	{"keys": ["alt+shift+down"], "command": "juloo_cursor", "args": {"action": "move_p", "down": true, "shift": true}},
 
+	{"keys": ["alt+z"], "command": "juloo_cursor", "args": {"action": "cut_sel"}},
+	{"keys": ["alt+shift+z"], "command": "juloo_cursor", "args": {"action": "cut_sel", "rev": true}},
+
 	// layout spliter
 	{"keys": ["super+k", "super+d"], "command": "juloo_layout_spliter", "args": {"action": "split", "direction": "vertical"}},
 	{"keys": ["super+k", "super+shift+d"], "command": "juloo_layout_spliter", "args": {"action": "split", "direction": "horizontal"}},

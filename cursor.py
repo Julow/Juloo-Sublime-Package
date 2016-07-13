@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/30 16:57:29 by juloo             #+#    #+#              #
-#    Updated: 2016/05/14 21:49:02 by juloo            ###   ########.fr        #
+#    Updated: 2016/07/13 13:33:16 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,10 @@ import sublime, sublime_plugin, itertools
 # ctrl+shift+{up,down}		Add a cursor 1 row {above,below}
 #
 # alt+{up,down}				Move to the {previous,next} paragraph
+# alt+shift+{up,down}		Select the {previous,next} paragraph
+#
+# alt+z						Cut selections in half
+# alt+shift+z				Cut selections in half + Reverse their directions
 #
 
 ACTIONS = {
@@ -38,6 +42,7 @@ ACTIONS = {
 	"add_up": lambda s, _: s.add_cursor_column(False),
 	"add_down": lambda s, _: s.add_cursor_column(True),
 	"move_p": lambda s, args: s.move_by_paragraph(-1 if "up" in args else 1, "shift" in args),
+	"cut_sel": lambda s, args: s.cut_sel("rev" in args and args["rev"]),
 }
 
 SAVED_REGIONS_KEY = "juloo_saved_cursors.%d"
@@ -127,9 +132,21 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 			if pt < 0:
 				break
 			sels.append(sublime.Region(s.a if shift else pt, pt))
+		self.set_selections(sels)
+		self.view.show(sels[0] if d < 0 else sels[-1])
+
+	# Cut selections in half
+	def cut_sel(self, rev):
+		def cut(s):
+			half = s.size() / (2 if s.b >= s.a else -2)
+			if rev:
+				return sublime.Region(s.a + half, s.a)
+			return sublime.Region(s.a, s.a + half)
+		self.set_selections(list(map(cut, self.view.sel())))
+
+	def set_selections(self, sels):
 		self.view.sel().clear()
 		self.view.sel().add_all(sels)
-		self.view.show(sels[0] if d < 0 else sels[-1])
 
 	# Add a cursor by column
 	def add_cursor_column(self, down):
