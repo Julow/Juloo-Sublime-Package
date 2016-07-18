@@ -12,8 +12,8 @@
 	// scroll
 	{"keys": ["ctrl+alt+d"], "command": "juloo_scroll", "args": {"half_page": true}},
 	{"keys": ["ctrl+alt+u"], "command": "juloo_scroll", "args": {"half_page": true, "rev": true}},
-	{"keys": ["ctrl+alt+e"], "command": "juloo_scroll", "args": {}},
-	{"keys": ["ctrl+alt+y"], "command": "juloo_scroll", "args": {"rev": true}},
+	{"keys": ["ctrl+e"], "command": "juloo_scroll", "args": {"offset": 5}},
+	{"keys": ["ctrl+y"], "command": "juloo_scroll", "args": {"offset": 5, "rev": true}},
 
 	// cursor
 	{"keys": ["alt+x"], "command": "juloo_cursor", "args": {"action": "clear"}},
