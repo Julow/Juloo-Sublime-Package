@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/14 20:47:40 by juloo             #+#    #+#              #
-#    Updated: 2016/07/05 20:07:54 by juloo            ###   ########.fr        #
+#    Updated: 2016/07/18 15:46:26 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,20 @@ import sublime, sublime_plugin, os
 # Move view in group
 # Move view to group
 #
+
 def mod(a, m):
 	return (a + m) % m
+
+ACTIONS = {
+	"group_next": lambda s, _: s.focus_group(1),
+	"group_prev": lambda s, _: s.focus_group(-1),
+	"view_next": lambda s, _: s.focus_view(1),
+	"view_prev": lambda s, _: s.focus_view(-1),
+	"move_right": lambda s, _: s.move_view(1),
+	"move_left": lambda s, _: s.move_view(-1),
+	"move_next": lambda s, _: s.move_to_group(1),
+	"move_prev": lambda s, _: s.move_to_group(-1),
+}
 
 class JulooFocusCommand(sublime_plugin.WindowCommand):
 
@@ -58,24 +70,5 @@ class JulooFocusCommand(sublime_plugin.WindowCommand):
 		self.window.set_view_index(view, group, 0)
 
 	def run(self, **args):
-		if not "action" in args:
-			print("lol noob")
-			return
-		if args["action"] == "group_next":
-			self.focus_group(1)
-		elif args["action"] == "group_prev":
-			self.focus_group(-1)
-		elif args["action"] == "view_next":
-			self.focus_view(1)
-		elif args["action"] == "view_prev":
-			self.focus_view(-1)
-		elif args["action"] == "move_right":
-			self.move_view(1)
-		elif args["action"] == "move_left":
-			self.move_view(-1)
-		elif args["action"] == "move_next":
-			self.move_to_group(1)
-		elif args["action"] == "move_prev":
-			self.move_to_group(-1)
-		else:
-			print("lol mdr: %s" % args["action"])
+		if "action" in args and args["action"] in ACTIONS:
+			ACTIONS[args["action"]](self, args)
