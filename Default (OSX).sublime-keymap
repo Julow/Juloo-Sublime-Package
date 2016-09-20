@@ -49,5 +49,6 @@
 	{"keys": ["super+b"], "command": "juloo_run_command"},
 
 	// Misc
-	{ "keys": ["super+k", "super+t"], "command": "toggle_tabs" }
+	{ "keys": ["super+k", "super+t"], "command": "toggle_tabs" },
+	{ "keys": ["super+e"], "command": "find_under_expand_skip" }
 ]
