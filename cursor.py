@@ -6,7 +6,7 @@
 #    By: juloo <juloo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/30 16:57:29 by juloo             #+#    #+#              #
-#    Updated: 2016/07/13 13:33:16 by jaguillo         ###   ########.fr        #
+#    Updated: 2016/10/03 17:49:05 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,6 +118,7 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 	def move_by_paragraph(self, d, shift):
 		sels = []
 		def empty_line(row):
+			empty = True
 			while True:
 				row += d
 				pt = self.view.text_point(row, 0)
@@ -125,7 +126,10 @@ class JulooCursorCommand(sublime_plugin.TextCommand):
 					return pt
 				line_str = self.view.substr(self.view.line(pt))
 				if len(line_str.strip()) == 0:
+					if empty:
+						continue
 					return pt + len(line_str)
+				empty = False
 		for s in self.view.sel():
 			row, _ = self.view.rowcol(s.b)
 			pt = empty_line(row)
