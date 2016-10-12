@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    JulooCpp.py                                        :+:      :+:    :+:    #
+#    cpp.py                                             :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/04/07 14:14:38 by jaguillo          #+#    #+#              #
-#    Updated: 2015/12/01 12:46:29 by jaguillo         ###   ########.fr        #
+#    Updated: 2016/10/12 11:11:44 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,35 +14,13 @@ import sublime, sublime_plugin
 
 c_class_template = """#include "%(hpp)s"
 
-%(class)s::%(class)s(void)
+%(class)s::%(class)s()
 {
 }
 
-%(class)s::~%(class)s(void)
+%(class)s::~%(class)s()
 {
 }
-
-// %(class)s::%(class)s(%(class)s &&src)
-// {
-// 	*this = src;
-// }
-
-// %(class)s::%(class)s(%(class)s const &src)
-// {
-// 	*this = src;
-// }
-
-// %(class)s			&%(class)s::operator=(%(class)s &&rhs)
-// {
-// 	// *this = rhs;
-// 	return (*this);
-// }
-
-// %(class)s			&%(class)s::operator=(%(class)s const &rhs)
-// {
-// 	// *this = rhs;
-// 	return (*this);
-// }
 """
 
 class JulooCppCommand(sublime_plugin.TextCommand):
@@ -68,23 +46,23 @@ hdef_after = """
 h_class_template = """class	%(class)s
 {
 public:
-	%(class)s(void);
-	virtual ~%(class)s(void);
+	virtual ~%(class)s();
 
 protected:
 
 private:
+	%(class)s() = delete;
 	%(class)s(%(class)s &&src) = delete;
 	%(class)s(%(class)s const &src) = delete;
-	%(class)s			&operator=(%(class)s &&rhs) = delete;
-	%(class)s			&operator=(%(class)s const &rhs) = delete;
+	%(class)s		&operator=(%(class)s &&rhs) = delete;
+	%(class)s		&operator=(%(class)s const &rhs) = delete;
 };
 """
 
 h_interface_template = """class	%(class)s
 {
 public:
-	virtual ~%(class)s(void){}
+	virtual ~%(class)s() {}
 
 protected:
 
