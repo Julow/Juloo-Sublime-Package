@@ -1,0 +1,8 @@
+{
+	"extensions":
+	[
+		"vert",
+		"frag",
+		"cl"
+	]
+}
