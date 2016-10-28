@@ -1,0 +1,53 @@
+background				#050505
+caret					#FFFFFF
+selection				#133f71
+selectionBorder			#1868bf
+lineHighlight			#1f1f1f
+findHighlight			#e6ce41
+findHighlightForeground	#000000
+activeGuide				#333333
+gutter					#0c0c0c
+gutterForeground		#333333
+
+text, source, string.unquoted:
+	foreground	#aaaaaa
+
+comment:
+	foreground	#28784D
+
+meta.preprocessor, storage.type.annotation, keyword.control.import, entity.name.function.preprocessor:
+	foreground	#4B966E
+	fontStyle	italic
+
+string, punctuation.definition.string, meta.tag.sgml, markup.raw:
+	foreground	#AA7639
+
+string.quoted.single, string.regexp, constant.character, constant.other:
+	foreground	#885516
+
+variable.language, constant.numeric, constant.language:
+	foreground	#804F15
+
+keyword:
+	foreground	#477187
+
+punctuation.definition.variable, entity.name.tag:
+	foreground	#804F15
+
+storage, storage.type.class, storage.type.function, meta.property-name:
+	foreground	#477187
+
+storage.type, entity.name.type.instance, storage.modifier.import, storage.modifier.package, entity.other.inherited-class, entity.other.attribute-name.pseudo-class, support.class, support.type, meta.definition.class:
+	foreground	#6F90A2
+
+entity.name.function, entity.name.class, entity.name.type, entity.name.struct, meta.selector, support.function.misc, support.function:
+	foreground	#AA5239
+
+punctuation.definition.heading:
+	foreground	#477187
+
+markup.bold, entity.name.section:
+	fontStyle	bold
+
+markup.italic:
+	fontStyle	italic

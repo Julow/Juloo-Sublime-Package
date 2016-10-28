@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+<key>settings</key>
+<array>
+<dict>
+	<key>settings</key><dict>
+		<key>background</key><string>#050505</string>
+		<key>caret</key><string>#FFFFFF</string>
+		<key>selection</key><string>#133f71</string>
+		<key>selectionBorder</key><string>#1868bf</string>
+		<key>lineHighlight</key><string>#1f1f1f</string>
+		<key>findHighlight</key><string>#e6ce41</string>
+		<key>findHighlightForeground</key><string>#000000</string>
+		<key>activeGuide</key><string>#333333</string>
+		<key>gutter</key><string>#0c0c0c</string>
+		<key>gutterForeground</key><string>#333333</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>text, source, string.unquoted</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#aaaaaa</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>comment</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#28784D</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>meta.preprocessor, storage.type.annotation, keyword.control.import, entity.name.function.preprocessor</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#4B966E</string>
+		<key>fontStyle</key><string>italic</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>string, punctuation.definition.string, meta.tag.sgml, markup.raw</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#AA7639</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>string.quoted.single, string.regexp, constant.character, constant.other</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#885516</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>variable.language, constant.numeric, constant.language</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#804F15</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>keyword</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#477187</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>punctuation.definition.variable, entity.name.tag</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#804F15</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>storage, storage.type.class, storage.type.function, meta.property-name</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#477187</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>storage.type, entity.name.type.instance, storage.modifier.import, storage.modifier.package, entity.other.inherited-class, entity.other.attribute-name.pseudo-class, support.class, support.type, meta.definition.class</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#6F90A2</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>entity.name.function, entity.name.class, entity.name.type, entity.name.struct, meta.selector, support.function.misc, support.function</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#AA5239</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>punctuation.definition.heading</string>
+	<key>settings</key><dict>
+		<key>foreground</key><string>#477187</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>markup.bold, entity.name.section</string>
+	<key>settings</key><dict>
+		<key>fontStyle</key><string>bold</string>
+	</dict>
+</dict>
+<dict>
+	<key>scope</key><string>markup.italic</string>
+	<key>settings</key><dict>
+		<key>fontStyle</key><string>italic</string>
+	</dict>
+</dict>
+</array>
+</dict>
+</plist>
