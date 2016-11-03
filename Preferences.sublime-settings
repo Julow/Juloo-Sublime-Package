@@ -24,7 +24,7 @@
 	"overlay_scroll_bars": "enabled",
 	"show_encoding": true,
 	"show_line_endings": true,
-	"show_tab_close_buttons": true,
+	"show_tab_close_buttons": false,
 	"tab_completion": false,
 	"word_wrap": false
 }

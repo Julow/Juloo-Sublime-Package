@@ -1,6 +1,11 @@
 [
 
 	{
+		"caption": "Distraction Free mode (no full-screen)",
+		"command": "juloo_simple_distraction_free"
+	},
+
+	{
 		"caption": "Run command",
 		"command": "juloo_run_command"
 	},
