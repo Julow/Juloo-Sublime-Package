@@ -13,10 +13,7 @@
 		"draw_normal",
 		"draw_active"
 	],
-	"rulers":
-	[
-		80
-	],
+	"rulers": [],
 	"scroll_past_end": true,
 	"index_files": false,
 	"mouse_wheel_switches_tabs": true,
@@ -26,5 +23,7 @@
 	"show_line_endings": true,
 	"show_tab_close_buttons": false,
 	"tab_completion": false,
-	"word_wrap": false
+	"word_wrap": false,
+	"gutter": false,
+	"draw_centered": true
 }
