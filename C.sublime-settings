@@ -3,6 +3,7 @@
 	[
 		"vert",
 		"frag",
-		"cl"
+		"cl",
+		"glsl"
 	]
 }
