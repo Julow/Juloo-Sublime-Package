@@ -31,7 +31,7 @@ variable.language, constant.numeric, constant.language:
 keyword:
 	foreground	#477187
 
-punctuation.definition.variable, entity.name.tag:
+punctuation.definition.variable, variable, entity.name.tag:
 	foreground	#804F15
 
 storage, storage.type.class, storage.type.function, meta.property-name:
@@ -40,10 +40,10 @@ storage, storage.type.class, storage.type.function, meta.property-name:
 storage.type, entity.name.type.instance, storage.modifier.import, storage.modifier.package, entity.other.inherited-class, entity.other.attribute-name.pseudo-class, support.class, support.type, meta.definition.class:
 	foreground	#6F90A2
 
-entity.name.function, entity.name.class, entity.name.type, entity.name.struct, meta.selector, support.function.misc, support.function:
+entity.name.function, entity.name.class, entity.name.type, entity.name.struct, meta.selector, entity.other.attribute-name, support.function.misc, support.function:
 	foreground	#AA5239
 
-punctuation.definition.heading:
+punctuation.definition.heading, comment.punctuation:
 	foreground	#477187
 
 markup.bold, entity.name.section:

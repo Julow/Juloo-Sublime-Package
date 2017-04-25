@@ -61,7 +61,7 @@
 	</dict>
 </dict>
 <dict>
-	<key>scope</key><string>punctuation.definition.variable, entity.name.tag</string>
+	<key>scope</key><string>punctuation.definition.variable, variable, entity.name.tag</string>
 	<key>settings</key><dict>
 		<key>foreground</key><string>#804F15</string>
 	</dict>
@@ -79,13 +79,13 @@
 	</dict>
 </dict>
 <dict>
-	<key>scope</key><string>entity.name.function, entity.name.class, entity.name.type, entity.name.struct, meta.selector, support.function.misc, support.function</string>
+	<key>scope</key><string>entity.name.function, entity.name.class, entity.name.type, entity.name.struct, meta.selector, entity.other.attribute-name, support.function.misc, support.function</string>
 	<key>settings</key><dict>
 		<key>foreground</key><string>#AA5239</string>
 	</dict>
 </dict>
 <dict>
-	<key>scope</key><string>punctuation.definition.heading</string>
+	<key>scope</key><string>punctuation.definition.heading, comment.punctuation</string>
 	<key>settings</key><dict>
 		<key>foreground</key><string>#477187</string>
 	</dict>
