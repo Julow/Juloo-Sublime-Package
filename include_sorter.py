@@ -21,13 +21,26 @@ def module_require(m):
 	prefix, _, name = name.rpartition("::")
 	return (visi, prefix, name)
 
+# Python imports
+# Sorted by name, [from ... import ...] are last
+# When there is multiple imports, the first one count
+def python_import(m):
+	return ("", m[0]) if m[0] else (m[1], m[2])
+
 #
 # ============================================================================ #
 #
 
 LANGS = [
 	(["C++"], [], '\s*#\s*include\s*(?:<([^>]+)>|"([^"]+)").*', c_include),
-	([], ["module"], '\s*(?:(public|private)\s+|)require\s+([^\s]+).*', module_require)
+	([], ["module"], '\s*(?:(public|private)\s+|)require\s+([^\s]+).*', module_require),
+	(["Python"], [], '\s*(?:import\s+(.+)|from\s+([^\s]+)\s+import\s+(.+))', python_import),
+	# OCaml opens, sorted by name
+	(["OCaml"], [], '\s*open\s+([^\s]+).*', lambda m: m[0]),
+	# Haskell imports, sorted by name
+	(["Haskell"], [], '\s*import\s+([^\s]+).*', lambda m: m[0]),
+	# Java imports, sorted by name
+	(["Java"], [], '\s*import\s+([^\s]+).*', lambda m: m[0])
 ]
 
 def get_lang(file_name, syntax):
@@ -78,7 +91,7 @@ class JulooSortInclude(sublime_plugin.TextCommand):
 
 	def run(self, edit, **args):
 		v = self.view
-		lang = get_lang(v.file_name(), v.settings().get("syntax"))
+		lang = get_lang(v.file_name() or "", v.settings().get("syntax"))
 		if lang is not None:
 			reg, read = lang
 			reg = re.compile(reg)
