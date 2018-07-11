@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2016/05/21 12:50:37 by juloo            ###   ########.fr        #
+#    Updated: 2018/07/11 06:22:56 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,3 +60,13 @@ class JulooOpenBrowser(sublime_plugin.TextCommand):
 		f = self.view.file_name()
 		if f != None:
 			webbrowser.open(f)
+
+#
+# Hide the menu bar when a window is opened
+#
+class JulooHideMenuBar(sublime_plugin.EventListener):
+
+	def on_new(self, view):
+		win = view.window()
+		if win.is_menu_visible():
+			win.set_menu_visible(False)
