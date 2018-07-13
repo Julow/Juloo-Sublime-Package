@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2018/07/11 06:22:56 by juloo            ###   ########.fr        #
+#    Updated: 2018/07/13 13:28:54 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,11 @@ class JulooOpenBrowser(sublime_plugin.TextCommand):
 #
 class JulooHideMenuBar(sublime_plugin.EventListener):
 
-	def on_new(self, view):
-		win = view.window()
-		if win.is_menu_visible():
-			win.set_menu_visible(False)
+	ok = False
+
+	def on_activated(self, view):
+		if not self.ok:
+			win = view.window()
+			if win.is_menu_visible():
+				win.set_menu_visible(False)
+			self.ok = True
