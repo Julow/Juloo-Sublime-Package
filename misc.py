@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2018/08/17 06:13:10 by juloo            ###   ########.fr        #
+#    Updated: 2018/08/17 06:37:19 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,3 +103,9 @@ class JulooFocusPanel(sublime_plugin.WindowCommand):
 			self.window.focus_group(self.window.active_group())
 		else:
 			self.window.focus_view(panel)
+			sels = panel.sel()
+			if len(sels) == 1 and sels[0].end() == 0:
+				ends = panel.size()
+				sels.clear()
+				sels.add(sublime.Region(ends, ends))
+				panel.show(ends)
