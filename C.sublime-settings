@@ -1,9 +1,0 @@
-{
-	"extensions":
-	[
-		"vert",
-		"frag",
-		"cl",
-		"glsl"
-	]
-}

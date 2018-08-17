@@ -4,10 +4,7 @@ All my sublime plugins.
 
 ## Installation
 
-`git clone` this repo in `%Sublime text location%/Packages/Juloo-Sublime-Package`<br />
-or download it manually.
-
-If you want to update the package, use `git pull`.
+Clone or download this repo in Sublime Text's `Package` directory.
 
 ## Content
 
@@ -60,6 +57,8 @@ Note: If there is multiple selections, the command is executed for each cursors
 * `ctrl+alt+pageup/pagedown` Move view to the right/left
 * `ctrl+alt+shift+pageup/pagedown` Move view to the next/prev group
 
+* `ctrl+k, ctrl+tab` Focus the output panel
+
 ### Cursor
 
 * `alt+s` Save current cursors
@@ -76,11 +75,15 @@ Note: If there is multiple selections, the command is executed for each cursors
 ### Side Bar
 
 * `ctrl+,` Toggle and focus side bar + Reveal current file
-* `ctrl+b, ctrl+,` Clear side bar
+* `ctrl+k, ctrl+,` Clear side bar
 
 ### Include Sort
 
-Sort C/C++ includes on save.
+- C, C++: `#include <...>`, `#include "..."`
+- Python: `import ...`, `import ... from ...`
+- OCaml: `open ...`
+- Haskell: `import ...`
+- Java: `import ...`
 
 Can be disabled:
 ```js
@@ -111,24 +114,12 @@ Commands:
 
 Color schemes:
 
-* `Juloo2`
-* `Juloo4`
+* `theme_2`
+* `theme_4`
+* `theme_5`
 
 Syntax:
 
 * `ASM syntax`
 
-Snippets:
-
-* `main` C main function
-* `/*` Comment
-* `** =` Comment separator (full line of '=')
-* `*/` Extend the comment
-* `# =` Comment separator
-* `std::cout` std::cout <<  << std::endl;
-
-Commands:
-
-* `.hpp` Create a Coplien form class header
-* `.cpp` Create a Coplien form class
-* `.h` Insert `#ifndef` header protection
+Some [snippets](snippets/)
