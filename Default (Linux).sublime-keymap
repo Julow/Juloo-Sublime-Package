@@ -54,5 +54,6 @@
 	// Misc
 	{"keys": ["ctrl+k", "ctrl+t"], "command": "toggle_tabs"},
 	{"keys": ["ctrl+e"], "command": "find_under_expand_skip"},
-	{"keys": ["shift+f11"], "command": "juloo_simple_distraction_free"}
+	{"keys": ["shift+f11"], "command": "juloo_simple_distraction_free"},
+	{"keys": ["ctrl+k", "ctrl+tab"], "command": "juloo_focus_panel"}
 ]

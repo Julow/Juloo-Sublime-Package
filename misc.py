@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2018/07/13 13:28:54 by juloo            ###   ########.fr        #
+#    Updated: 2018/08/17 06:13:10 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,3 +74,32 @@ class JulooHideMenuBar(sublime_plugin.EventListener):
 			if win.is_menu_visible():
 				win.set_menu_visible(False)
 			self.ok = True
+
+#
+# Toggle focus of the current output panel
+#
+class JulooFocusPanel(sublime_plugin.WindowCommand):
+
+	# Active output panel's view or None
+	def active_output_panel(self):
+		prefix = "output."
+		panel = self.window.active_panel()
+		if panel == None or not panel.startswith(prefix):
+			return None
+		panel = panel[len(prefix):]
+		return self.window.find_output_panel(panel)
+
+	# Retrieve the active output panel
+	# set a flag in the panel's settings to known if its focused or not
+	def run(self):
+		panel = self.active_output_panel()
+		if panel == None:
+			return
+		ps = panel.settings()
+		focused = ps.get("juloo_focused", False)
+		ps.set("juloo_focused", not focused)
+		if focused:
+			# When focusing a panel, the active group is not modified
+			self.window.focus_group(self.window.active_group())
+		else:
+			self.window.focus_view(panel)

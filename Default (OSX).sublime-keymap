@@ -54,5 +54,6 @@
 	// Misc
 	{"keys": ["super+k", "super+t"], "command": "toggle_tabs"},
 	{"keys": ["super+e"], "command": "find_under_expand_skip"},
-	{"keys": ["super+shift+f11"], "command": "juloo_simple_distraction_free"}
+	{"keys": ["super+shift+f11"], "command": "juloo_simple_distraction_free"},
+	{"keys": ["super+k", "super+tab"], "command": "juloo_focus_panel"}
 ]
