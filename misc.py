@@ -68,7 +68,7 @@ class JulooHideMenuBar(sublime_plugin.EventListener):
 
 	ok = False
 
-	def on_activated(self, view):
+	def on_new(self, view):
 		if not self.ok:
 			win = view.window()
 			if win.is_menu_visible():
