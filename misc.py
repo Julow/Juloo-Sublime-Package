@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2018/08/17 06:37:19 by juloo            ###   ########.fr        #
+#    Updated: 2018/08/25 02:11:12 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,19 +61,14 @@ class JulooOpenBrowser(sublime_plugin.TextCommand):
 		if f != None:
 			webbrowser.open(f)
 
-#
-# Hide the menu bar when a window is opened
-#
-class JulooHideMenuBar(sublime_plugin.EventListener):
 
-	ok = False
+#
+# Hide the menu bar
+#
+def hidemenu():
+	sublime.active_window().set_menu_visible(False)
 
-	def on_new(self, view):
-		if not self.ok:
-			win = view.window()
-			if win.is_menu_visible():
-				win.set_menu_visible(False)
-			self.ok = True
+sublime.set_timeout(hidemenu, 100)
 
 #
 # Toggle focus of the current output panel
