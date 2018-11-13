@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/24 01:04:00 by jaguillo          #+#    #+#              #
-#    Updated: 2018/08/25 02:11:12 by juloo            ###   ########.fr        #
+#    Updated: 2018/11/13 09:45:35 by juloo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,10 +65,14 @@ class JulooOpenBrowser(sublime_plugin.TextCommand):
 #
 # Hide the menu bar
 #
-def hidemenu():
-	sublime.active_window().set_menu_visible(False)
+class HideMenu(sublime_plugin.EventListener):
 
-sublime.set_timeout(hidemenu, 100)
+	menu_visible = True
+
+	def on_new(self, view):
+		w = view.window()
+		if w.is_menu_visible():
+			w.set_menu_visible(False)
 
 #
 # Toggle focus of the current output panel
