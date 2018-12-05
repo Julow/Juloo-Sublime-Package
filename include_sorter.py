@@ -36,7 +36,7 @@ LANGS = [
 	([], ["module"], '\s*(?:(public|private)\s+|)require\s+([^\s]+).*', module_require),
 	# Python imports and requirements.txt files
 	(["Python"], [], '\s*(?:import\s+(.+)|from\s+([^\s]+)\s+import\s+(.+))', python_import),
-	([], ["requirements.txt"], '^([^#].*)$', lambda m: m[0]),
+	([], ["requirements.txt"], '^([^#].*)$', lambda m: m[0].lower()),
 	# OCaml opens, sorted by name
 	(["OCaml"], [], '\s*open\s+([^\s]+).*', lambda m: m[0]),
 	# Haskell imports, sorted by name
