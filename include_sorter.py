@@ -34,7 +34,9 @@ def python_import(m):
 LANGS = [
 	(["C++"], [], '\s*#\s*include\s*(?:<([^>]+)>|"([^"]+)").*', c_include),
 	([], ["module"], '\s*(?:(public|private)\s+|)require\s+([^\s]+).*', module_require),
+	# Python imports and requirements.txt files
 	(["Python"], [], '\s*(?:import\s+(.+)|from\s+([^\s]+)\s+import\s+(.+))', python_import),
+	([], ["requirements.txt"], '^([^#].*)$', lambda m: m[0]),
 	# OCaml opens, sorted by name
 	(["OCaml"], [], '\s*open\s+([^\s]+).*', lambda m: m[0]),
 	# Haskell imports, sorted by name
