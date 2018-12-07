@@ -10,7 +10,6 @@
 	"highlight_modified_tabs": true,
 	"indent_guide_options":
 	[
-		"draw_normal",
 		"draw_active"
 	],
 	"rulers": [],
@@ -23,7 +22,9 @@
 	"show_line_endings": true,
 	"show_tab_close_buttons": false,
 	"tab_completion": false,
-	"word_wrap": false,
+	"word_wrap": true,
+	"wrap_width": 81,
 	"gutter": false,
-	"draw_centered": true
+	"draw_centered": true,
+	"match_brackets_angle": true,
 }
