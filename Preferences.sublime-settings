@@ -1,9 +1,7 @@
 {
 	"always_prompt_for_file_reload": true,
-	"auto_close_tags": true,
 	"update_check": false,
-	"bold_folder_labels": true,
-	"caret_style": "phase",
+	"caret_style": "blink",
 	"default_line_ending": "unix",
 	"drag_text": false,
 	"ensure_newline_at_eof_on_save": true,
@@ -12,8 +10,6 @@
 	[
 		"draw_active"
 	],
-	"rulers": [],
-	"scroll_past_end": true,
 	"index_files": false,
 	"mouse_wheel_switches_tabs": true,
 	"open_files_in_new_window": false,
@@ -21,9 +17,12 @@
 	"show_encoding": true,
 	"show_line_endings": true,
 	"show_tab_close_buttons": false,
+	"show_full_path": false,
 	"tab_completion": false,
 	"word_wrap": true,
 	"wrap_width": 81,
 	"gutter": false,
 	"draw_centered": true,
+	"hot_exit": false,
+	"remember_open_files": false
 }
