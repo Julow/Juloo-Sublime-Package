@@ -1,5 +1,6 @@
 {
 	"always_prompt_for_file_reload": true,
+	"juloo_42_header": false,
 	"update_check": false,
 	"caret_style": "blink",
 	"default_line_ending": "unix",
